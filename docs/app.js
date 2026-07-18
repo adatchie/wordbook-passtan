@@ -539,11 +539,15 @@ class GameEngine {
     this.session.state = 'incorrectFeedback';
     this.saveSession();
     this.onChange('incorrectFeedback', { session: this.session });
-    setTimeout(() => this.presentQuestion(), 800);
+  }
+
+  retry() {
+    if (!this.session || this.session.state !== 'incorrectFeedback') return;
+    this.presentQuestion();
   }
 
   async manualPass(imageDataUrl) {
-    if (!this.session || this.session.state !== 'acceptingInk') {
+    if (!this.session || (this.session.state !== 'acceptingInk' && this.session.state !== 'incorrectFeedback')) {
       return { ok: false, reason: 'state' };
     }
     if (!this.isManualPassAllowed()) {
@@ -562,7 +566,7 @@ class GameEngine {
   }
 
   markCorrect(isManual = false) {
-    if (!this.session || this.session.state !== 'acceptingInk') return;
+    if (!this.session || (this.session.state !== 'acceptingInk' && !(this.session.state === 'incorrectFeedback' && isManual))) return;
     this.stopTimer();
     this.session.netCorrectCount += 1;
     this.recordAttempt(isManual ? 'manualPass' : 'correct');
@@ -585,7 +589,7 @@ class GameEngine {
   }
 
   isManualPassAllowed() {
-    if (!this.session || this.session.state !== 'acceptingInk') return false;
+    if (!this.session || (this.session.state !== 'acceptingInk' && this.session.state !== 'incorrectFeedback')) return false;
     if (this.session.manualPassAvailable === false) return false;
     return this.session.manualPassCount < this.settings.manualPassLimit;
   }
@@ -828,7 +832,7 @@ class UIController {
 
     $('#btn-correct').addEventListener('click', () => this.onCorrect());
     this.els.manualPassBtn.addEventListener('click', () => this.onManualPass());
-    this.els.retryBtn.addEventListener('click', () => this.engine.markIncorrect());
+    this.els.retryBtn.addEventListener('click', () => this.onRetry());
     this.els.savePngBtn.addEventListener('click', () => this.onSavePng());
     $('#btn-pause').addEventListener('click', () => {
       this.engine.suspend();
@@ -860,6 +864,7 @@ class UIController {
           this.els.previousList.innerHTML = '';
         }
         this.canvasCtrl.clear();
+        this.els.retryBtn.innerHTML = '× OCRが間違い判定（テスト）';
         this.updateQuestion(payload);
         this.updateTimer({ remainingMs: payload.remainingMs, ratio: 1 });
         this.setFeedback('', '');
@@ -882,6 +887,9 @@ class UIController {
         break;
       case 'incorrectFeedback':
         this.setControlsEnabled(false);
+        this.els.retryBtn.innerHTML = 'もう一度書く';
+        this.els.retryBtn.disabled = false;
+        this.updateManualPassStatus();
         this.setFeedback('OCRは間違いと判定。もう一度書くか、手動正解を使ってください。', 'incorrect');
         break;
       case 'timedOut':
@@ -936,6 +944,14 @@ class UIController {
       return;
     }
     this.engine.markCorrect(false);
+  }
+
+  onRetry() {
+    if (this.engine.session && this.engine.session.state === 'incorrectFeedback') {
+      this.engine.retry();
+    } else {
+      this.engine.markIncorrect();
+    }
   }
 
   updateManualPassStatus() {
