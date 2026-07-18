@@ -1,0 +1,386 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+  background: #f5f5f7;
+  color: #1c1c1e;
+  overscroll-behavior: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+#app {
+  width: 100%;
+  max-width: 520px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+}
+
+.screen.active {
+  display: flex;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-top: 24px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 16px;
+}
+
+.note, .warning {
+  font-size: 0.85rem;
+  color: #636366;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.warning {
+  color: #c0392b;
+}
+
+.menu-buttons,
+.session-controls,
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.05s, background 0.15s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button.primary {
+  background: #007aff;
+  color: #fff;
+}
+
+button.secondary {
+  background: #e5e5ea;
+  color: #1c1c1e;
+}
+
+button.danger {
+  background: #ff3b30;
+  color: #fff;
+}
+
+button.manual {
+  background: #ff9500;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+button.manual small {
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.info {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #3a3a3c;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Session header */
+.session-header {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.level-progress {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+#session-level {
+  color: #007aff;
+}
+
+.timer-bar {
+  height: 10px;
+  background: #e5e5ea;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+#timer-fill {
+  height: 100%;
+  width: 100%;
+  background: #34c759;
+  transform-origin: left;
+  transition: width 0.1s linear, background 0.2s;
+}
+
+#timer-fill.urgent {
+  background: #ff9500;
+}
+
+#timer-fill.danger {
+  background: #ff3b30;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+#timer-text {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+}
+
+/* Previous words scroll list */
+#previous-list {
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+#previous-list .item {
+  background: #f0f0f5;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+#previous-list .item.manual {
+  background: #fff4e5;
+}
+
+/* Question area */
+#question-area {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.prompt {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  word-break: break-word;
+  min-height: 2.8rem;
+}
+
+.meaning {
+  font-size: 1.2rem;
+  color: #3a3a3c;
+  margin-top: 8px;
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: #8e8e93;
+  margin-top: 6px;
+}
+
+/* Canvas */
+#draw-canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 350;
+  background: #ffffff;
+  border: 3px solid #c7c7cc;
+  border-radius: 16px;
+  touch-action: none;
+  cursor: crosshair;
+  margin-bottom: 12px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.feedback {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.feedback.correct {
+  color: #34c759;
+}
+
+.feedback.incorrect {
+  color: #ff3b30;
+}
+
+.feedback.timeout {
+  color: #ff9500;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: #636366;
+  text-align: center;
+  min-height: 1.2rem;
+  margin-top: 4px;
+}
+
+/* Settings / forms */
+.settings-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.settings-form input,
+#parent-pin {
+  border: 1px solid #c7c7cc;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1.1rem;
+}
+
+/* Lists */
+.list, .audit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: 60vh;
+  margin-bottom: 12px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  font-size: 0.9rem;
+}
+
+.card .title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card img {
+  max-width: 100%;
+  border: 1px solid #e5e5ea;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.card .actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.card .actions button {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.85rem;
+}
+
+/* Dialog */
+dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  max-width: 90vw;
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,0.4);
+}
+
+.dialog-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.dialog-content p {
+  font-size: 1.05rem;
+  margin: 0 0 16px 0;
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.dialog-buttons button {
+  flex: 1;
+}
+
+/* Utility spacing */
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }

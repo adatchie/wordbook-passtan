@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Wordbook Web試作</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <section id="screen-main" class="screen active">
+      <h1>Wordbook Web試作</h1>
+      <p class="note">
+        iPad版は Apple Vision OCR を使います。<br>
+        このWeb版はUX・タイマー・筆跡PNG収集の試作です。<br>
+        自動認識は行わず、書き終わったら「手動正解」または「書き直す」を押してください。
+      </p>
+      <div class="menu-buttons">
+        <button id="btn-start-l1" class="primary">Lv1 開始</button>
+        <button id="btn-start-l2" class="primary">Lv2 開始</button>
+        <button id="btn-start-l3" class="primary">Lv3 開始</button>
+        <button id="btn-resume" class="secondary hidden">セッションを再開</button>
+        <button id="btn-clear-session" class="danger hidden">中断データを消す</button>
+        <button id="btn-settings" class="secondary">設定</button>
+        <button id="btn-history" class="secondary">履歴</button>
+        <button id="btn-parent" class="secondary">保護者</button>
+      </div>
+      <div id="active-session-info" class="info hidden"></div>
+    </section>
+
+    <section id="screen-session" class="screen">
+      <header class="session-header">
+        <div class="level-progress">
+          <span id="session-level">Lv1</span>
+          <span id="session-progress">0 / 100</span>
+        </div>
+        <div class="timer-bar"><div id="timer-fill"></div></div>
+        <div id="timer-text">15.0</div>
+      </header>
+
+      <div id="question-area">
+        <div id="question-prompt" class="prompt">apple</div>
+        <div id="question-meaning" class="meaning">りんご</div>
+        <div id="question-hint" class="hint">5文字</div>
+      </div>
+
+      <div id="previous-list" class="previous-list"></div>
+
+      <canvas id="draw-canvas" width="600" height="350" touch-action="none"></canvas>
+
+      <div id="feedback" class="feedback hidden"></div>
+
+      <div class="session-controls">
+        <button id="btn-correct" class="primary">できた！</button>
+        <button id="btn-manual-pass" class="manual">認識されない<br><small>（手動正解）</small></button>
+        <button id="btn-retry" class="secondary">書き直す</button>
+        <button id="btn-save-png" class="secondary">PNG保存</button>
+        <button id="btn-pause" class="secondary">中断</button>
+      </div>
+      <div id="manual-pass-status" class="status"></div>
+    </section>
+
+    <section id="screen-completion" class="screen">
+      <h2>セッション完了</h2>
+      <div id="completion-summary" class="summary"></div>
+      <button id="btn-download-session" class="primary">データをダウンロード</button>
+      <button id="btn-back-menu" class="secondary">メニューへ</button>
+    </section>
+
+    <section id="screen-settings" class="screen">
+      <h2>設定</h2>
+      <div class="settings-form">
+        <label>
+          制限時間（秒）
+          <input id="setting-time-limit" type="number" min="3" max="60" value="15">
+        </label>
+        <label>
+          TTS速度
+          <input id="setting-tts-rate" type="number" min="0.3" max="2.0" step="0.1" value="0.9">
+        </label>
+        <label>
+          1セッションの問題数
+          <input id="setting-word-count" type="number" min="5" max="100" value="100">
+        </label>
+        <label>
+          手動正解上限（1セッション）
+          <input id="setting-manual-limit" type="number" min="0" max="20" value="5">
+        </label>
+        <label>
+          手動正解クールダウン（問）
+          <input id="setting-manual-cooldown" type="number" min="0" max="10" value="2">
+        </label>
+        <label>
+          PIN変更（現在のPIN）
+          <input id="setting-current-pin" type="password" maxlength="6" inputmode="numeric" placeholder="0000">
+        </label>
+        <label>
+          新しいPIN（4〜6桁の数字）
+          <input id="setting-new-pin" type="password" maxlength="6" inputmode="numeric" placeholder="新しいPIN">
+        </label>
+        <p class="warning">初期PINは 0000 です。忘れた場合は「全データ消去」でリセットできます。</p>
+        <button id="btn-save-settings" class="primary">保存</button>
+        <button id="btn-reset-data" class="danger">全データ消去</button>
+        <button id="btn-settings-back" class="secondary">戻る</button>
+      </div>
+    </section>
+
+    <section id="screen-history" class="screen">
+      <h2>成績履歴</h2>
+      <div id="history-list" class="list"></div>
+      <button id="btn-history-back" class="secondary">戻る</button>
+    </section>
+
+    <section id="screen-parent-login" class="screen">
+      <h2>保護者確認</h2>
+      <p>保護者PINを入力してください</p>
+      <input id="parent-pin" type="password" maxlength="6" inputmode="numeric" placeholder="0000">
+      <button id="btn-parent-login" class="primary">開く</button>
+      <button id="btn-parent-login-back" class="secondary">戻る</button>
+      <p class="note">PINを忘れた場合は設定から「全データ消去」で初期化できます。</p>
+    </section>
+
+    <section id="screen-parent" class="screen">
+      <h2>手動正解記録</h2>
+      <div id="audit-list" class="audit-list"></div>
+      <button id="btn-parent-back" class="secondary">戻る</button>
+    </section>
+
+    <dialog id="confirm-dialog">
+      <div class="dialog-content">
+        <p id="confirm-message"></p>
+        <div class="dialog-buttons">
+          <button id="confirm-yes" class="primary">はい</button>
+          <button id="confirm-no" class="secondary">いいえ</button>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
