@@ -3,7 +3,7 @@
 /* ============================================================
    Wordbook Web 試作
    - 目的: UX・タイマー・難易度・筆跡PNG収集の検証
-   - 制限: ブラウザでOCRは行わない。iPad版では Apple Vision を使用
+   - 備考: ブラウザでのOCRは Tesseract.js でテスト実装。iPad版では Apple Vision を使用予定
    ============================================================ */
 
 const STORAGE_KEYS = {
@@ -371,6 +371,39 @@ class CanvasController {
 }
 
 /* ============================================================
+   OCR
+   ============================================================ */
+
+function normalizeOCRText(text) {
+  if (!text) return '';
+  return String(text).toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
+}
+
+class OCRController {
+  constructor() {
+    this.workerPromise = null;
+  }
+
+  getWorker() {
+    if (typeof Tesseract === 'undefined') {
+      return Promise.reject(new Error('Tesseract.js が読み込まれていません'));
+    }
+    if (!this.workerPromise) {
+      this.workerPromise = Tesseract.createWorker('eng', 1, {
+        logger: m => console.log('[tesseract]', m)
+      });
+    }
+    return this.workerPromise;
+  }
+
+  async recognize(imageDataUrl) {
+    const worker = await this.getWorker();
+    const { data } = await worker.recognize(imageDataUrl);
+    return { text: (data.text || '').trim(), confidence: data.confidence || 0 };
+  }
+}
+
+/* ============================================================
    Game Engine
    ============================================================ */
 
@@ -604,6 +637,14 @@ class GameEngine {
     this.session.manualPassCooldown = this.settings.manualPassCooldown;
     this.markCorrect(true);
     return { ok: true };
+  }
+
+  checkOCR(text) {
+    const info = this.getCurrentInfo();
+    if (!info.word) return { matched: false, expected: '', normalized: normalizeOCRText(text), raw: text || '' };
+    const expected = info.word.word.toLowerCase();
+    const normalized = normalizeOCRText(text);
+    return { matched: normalized === expected && expected !== '', expected, normalized, raw: text || '' };
   }
 
   markCorrect(isManual = false) {
@@ -841,6 +882,7 @@ class UIController {
     this.engine = engine;
     this.canvasCtrl = canvasCtrl;
     this.settings = settings;
+    this.ocr = new OCRController();
     this.cacheElements();
     this.bindEvents();
     this.updateMainScreen();
@@ -864,6 +906,7 @@ class UIController {
     this.els.feedback = $('#feedback');
     this.els.manualPassBtn = $('#btn-manual-pass');
     this.els.retryBtn = $('#btn-retry');
+    this.els.ocrBtn = $('#btn-ocr');
     this.els.savePngBtn = $('#btn-save-png');
     this.els.manualPassStatus = $('#manual-pass-status');
     this.els.previousList = $('#previous-list');
@@ -970,6 +1013,7 @@ class UIController {
     $('#btn-correct').addEventListener('click', () => this.onCorrect());
     this.els.manualPassBtn.addEventListener('click', () => this.onManualPass());
     this.els.retryBtn.addEventListener('click', () => this.onRetry());
+    this.els.ocrBtn.addEventListener('click', () => this.onOCR());
     this.els.savePngBtn.addEventListener('click', () => this.onSavePng());
     $('#btn-pause').addEventListener('click', () => {
       this.engine.suspend();
@@ -1088,6 +1132,7 @@ class UIController {
     $('#btn-correct').disabled = !enabled;
     this.els.manualPassBtn.disabled = !enabled;
     this.els.retryBtn.disabled = !enabled;
+    if (this.els.ocrBtn) this.els.ocrBtn.disabled = !enabled;
     this.els.savePngBtn.disabled = !enabled;
     $('#btn-pause').disabled = !enabled;
     $('#draw-canvas').style.pointerEvents = enabled ? 'auto' : 'none';
@@ -1110,6 +1155,36 @@ class UIController {
       this.engine.markWrongAndNext();
     } else if (this.engine.session && this.engine.session.state === 'acceptingInk') {
       this.engine.markIncorrect();
+    }
+  }
+
+  async onOCR() {
+    if (!this.engine.session || this.engine.session.state !== 'acceptingInk') return;
+    if (!this.canvasCtrl.hasDrawing()) {
+      alert('まだ何も書かれていません');
+      return;
+    }
+
+    this.engine.stopTimer();
+    this.setControlsEnabled(false);
+    this.setFeedback('OCR認識中…', '');
+
+    try {
+      const image = this.canvasCtrl.renderToDataURL({ padding: 30, scale: 3, background: '#ffffff', stroke: '#000000' });
+      const result = await this.ocr.recognize(image);
+      const check = this.engine.checkOCR(result.text);
+
+      if (check.matched) {
+        this.setFeedback(`OCR一致「${check.normalized}」（信頼度 ${Math.round(result.confidence)}%）`, 'correct');
+        this.engine.markCorrect(false);
+      } else {
+        this.setFeedback(`OCR結果「${check.normalized || result.text || '（不明）'}」（信頼度 ${Math.round(result.confidence)}%）`, 'incorrect');
+        this.engine.markIncorrect();
+      }
+    } catch (e) {
+      console.error(e);
+      this.setFeedback('OCRエラー: ' + (e.message || '不明'), 'incorrect');
+      this.setControlsEnabled(true);
     }
   }
 

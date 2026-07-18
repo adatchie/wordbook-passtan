@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Wordbook Web試作</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/tesseract.js@4.1.1/dist/tesseract.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <main id="app">
@@ -13,7 +14,7 @@
       <p class="note">
         iPad版は Apple Vision OCR を使います。<br>
         このWeb版はUX・タイマー・筆跡PNG収集の試作です。<br>
-        自動認識は行わず、書き終わったら「手動正解」または「書き直す」を押してください。
+        自動認識は行わず、書き終わったら「手動正解」、「書き直す」、またはテスト用「OCRで判定」を押してください。
       </p>
       <div class="menu-buttons">
         <button id="btn-start-l1" class="primary">Lv1 開始</button>
@@ -57,6 +58,7 @@
         <button id="btn-correct" class="primary">できた！</button>
         <button id="btn-manual-pass" class="manual">手動正解<br><small>（保護者・筆跡監査）</small></button>
         <button id="btn-retry" class="secondary">× OCRが間違い判定（テスト）</button>
+        <button id="btn-ocr" class="secondary">OCRで判定（テスト）</button>
         <button id="btn-save-png" class="secondary">PNG保存</button>
         <button id="btn-pause" class="secondary">中断</button>
       </div>
