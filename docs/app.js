@@ -386,7 +386,7 @@ class OCRController {
   }
 
   _getPaddleOCRURL() {
-    return 'https://esm.sh/@paddleocr/paddleocr-js@0.4.2/es2022/paddleocr-js.mjs';
+    return 'https://cdn.jsdelivr.net/npm/@paddleocr/paddleocr-js@0.4.2/+esm';
   }
 
   _getOrtOptions() {
