@@ -389,6 +389,19 @@ class OCRController {
     return 'https://cdn.jsdelivr.net/npm/@paddleocr/paddleocr-js@0.4.2/+esm';
   }
 
+  _getModelAssets() {
+    return {
+      textDetectionModelName: 'PP-OCRv5_mobile_det',
+      textDetectionModelAsset: {
+        url: 'https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv5_mobile_det_infer.tar'
+      },
+      textRecognitionModelName: 'en_PP-OCRv5_mobile_rec',
+      textRecognitionModelAsset: {
+        url: 'https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/en_PP-OCRv5_mobile_rec_infer.tar'
+      }
+    };
+  }
+
   _getOrtOptions() {
     return {
       backend: 'wasm',
@@ -409,8 +422,7 @@ class OCRController {
           }
           const PaddleOCR = mod.PaddleOCR;
           this.ocr = await PaddleOCR.create({
-            textDetectionModelName: 'PP-OCRv5_mobile_det',
-            textRecognitionModelName: 'PP-OCRv5_mobile_rec',
+            ...this._getModelAssets(),
             textDetectionBatchSize: 1,
             textRecognitionBatchSize: 1,
             worker: false,
@@ -430,23 +442,37 @@ class OCRController {
   async recognize(imageDataUrl) {
     const ocr = await this.getOCR();
 
-    let input = imageDataUrl;
-    if (typeof imageDataUrl === 'string' && imageDataUrl.startsWith('data:')) {
-      const res = await fetch(imageDataUrl);
-      input = await res.blob();
-    }
-
-    const [result] = await ocr.predict(input);
+    const input = await this._loadImage(imageDataUrl);
+    const predictParams = {
+      textDetThresh: 0.3,
+      textDetBoxThresh: 0.3,
+      textRecScoreThresh: 0.5
+    };
+    const [result] = await ocr.predict(input, predictParams);
+    const metrics = (result && result.metrics) || {};
     const items = (result && result.items) || [];
+
     if (!items.length) {
-      return { text: '', confidence: 0 };
+      return { text: '', confidence: 0, metrics };
     }
 
     items.sort((a, b) => (b.score || 0) - (a.score || 0));
     const best = items[0];
     const text = (best.text || '').trim();
     const score = typeof best.score === 'number' ? best.score : 0;
-    return { text, confidence: Math.round(score * 100) };
+    return { text, confidence: Math.round(score * 100), metrics };
+  }
+
+  _loadImage(imageDataUrl) {
+    if (typeof imageDataUrl !== 'string' || !imageDataUrl.startsWith('data:')) {
+      return imageDataUrl;
+    }
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('手書き画像の読み込みに失敗しました'));
+      img.src = imageDataUrl;
+    });
   }
 }
 
@@ -1240,10 +1266,10 @@ class UIController {
       console.log('[OCR]', result);
       const check = this.engine.checkOCR(result.text);
       const confidence = result.confidence || 0;
-
+      const metrics = result.metrics || {};
       const rawText = (result.text || '(読み取れず)').trim();
       const normText = check.normalized || '(なし)';
-      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}%`;
+      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}% / detectedBoxes: ${metrics.detectedBoxes ?? '-'} / recognizedCount: ${metrics.recognizedCount ?? '-'}`;
       if (this.els.ocrDebug) {
         this.els.ocrDebug.textContent = debugText;
         this.els.ocrDebug.style.display = 'block';
