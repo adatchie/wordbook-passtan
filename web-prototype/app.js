@@ -381,59 +381,71 @@ function normalizeOCRText(text) {
 
 class OCRController {
   constructor() {
-    this.workerPromise = null;
-    this.readyPromise = null;
-    this.ocrParams = {
-      tessedit_pageseg_mode: (typeof Tesseract !== 'undefined' && Tesseract.PSM && Tesseract.PSM.SINGLE_WORD) ? Tesseract.PSM.SINGLE_WORD : '8',
-      tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyz'
-    };
+    this.ocrPromise = null;
+    this.ocr = null;
   }
 
-  _dictInitParams() {
+  _getPaddleOCRURL() {
+    return 'https://cdn.jsdelivr.net/npm/@paddleocr/paddleocr-js@0.4.2/dist/index.mjs';
+  }
+
+  _getOrtOptions() {
     return {
-      load_system_dawg: '0',
-      load_freq_dawg: '0',
-      load_punc_dawg: '0',
-      load_number_dawg: '0',
-      load_unambig_dawg: '0',
-      load_fixed_length_dawgs: '0',
-      tessedit_enable_doc_dict: '0',
-      tessedit_enable_dict_correction: '0',
-      language_model_penalty_non_dict_word: '0',
-      language_model_penalty_non_freq_dict_word: '0'
+      backend: 'wasm',
+      numThreads: 1
     };
   }
 
-  getWorker() {
-    if (typeof Tesseract === 'undefined') {
-      return Promise.reject(new Error('Tesseract.js が読み込まれていません'));
+  getOCR() {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return Promise.reject(new Error('PaddleOCR.js はブラウザ環境でのみ動作します'));
     }
-    if (!this.workerPromise) {
-      this.workerPromise = Tesseract.createWorker({
-        logger: m => console.log('[tesseract]', m)
-      });
-      this.readyPromise = this.workerPromise.then(async (worker) => {
-        if (typeof worker.loadLanguage === 'function') {
-          await worker.loadLanguage('eng');
-        }
-        if (typeof worker.initialize === 'function') {
-          try {
-            await worker.initialize('eng', 0, this._dictInitParams());
-          } catch (legacyErr) {
-            console.warn('[OCR] Legacy engine not available, fallback to LSTM', legacyErr);
-            await worker.initialize('eng', 1, this._dictInitParams());
+    if (!this.ocrPromise) {
+      this.ocrPromise = (async () => {
+        try {
+          const mod = await import(this._getPaddleOCRURL());
+          if (!mod || !mod.PaddleOCR) {
+            throw new Error('PaddleOCR.js の読み込みに失敗しました');
           }
+          const PaddleOCR = mod.PaddleOCR;
+          this.ocr = await PaddleOCR.create({
+            textDetectionModelName: 'PP-OCRv5_mobile_det',
+            textRecognitionModelName: 'PP-OCRv5_mobile_rec',
+            textDetectionBatchSize: 1,
+            textRecognitionBatchSize: 1,
+            ortOptions: this._getOrtOptions()
+          });
+          return this.ocr;
+        } catch (e) {
+          console.error('[OCR] PaddleOCR.create failed', e);
+          this.ocrPromise = null;
+          throw e;
         }
-        return worker;
-      });
+      })();
     }
-    return this.readyPromise;
+    return this.ocrPromise;
   }
 
   async recognize(imageDataUrl) {
-    const worker = await this.getWorker();
-    const { data } = await worker.recognize(imageDataUrl, this.ocrParams);
-    return { text: (data.text || '').trim(), confidence: data.confidence || 0 };
+    const ocr = await this.getOCR();
+
+    let input = imageDataUrl;
+    if (typeof imageDataUrl === 'string' && imageDataUrl.startsWith('data:')) {
+      const res = await fetch(imageDataUrl);
+      input = await res.blob();
+    }
+
+    const [result] = await ocr.predict(input);
+    const items = (result && result.items) || [];
+    if (!items.length) {
+      return { text: '', confidence: 0 };
+    }
+
+    items.sort((a, b) => (b.score || 0) - (a.score || 0));
+    const best = items[0];
+    const text = (best.text || '').trim();
+    const score = typeof best.score === 'number' ? best.score : 0;
+    return { text, confidence: Math.round(score * 100) };
   }
 }
 
