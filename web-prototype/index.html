@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Wordbook Web試作</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- PaddleOCR.js は app.js 内で動的 import されます -->
+  <!-- Transformers.js (TrOCR) は app.js 内で動的 import されます -->
 </head>
 <body>
   <main id="app">
@@ -14,7 +14,7 @@
       <p class="note">
         iPad版は Apple Vision OCR を使います。<br>
         このWeb版はUX・タイマー・筆跡PNG収集の試作です。<br>
-        OCR は PaddleOCR.js（PP-OCRv5）を使います。初回のみモデルのダウンロードに時間がかかります。<br>
+        OCR は Transformers.js + TrOCR（手書き英字認識）を使います。初回はモデルダウンロード（約 60MB）に時間がかかります。<br>
         「できた！」を押すと自動判定します。うまく認識しなければ「手動正解」または「書き直す」で対応してください。
       </p>
       <div class="menu-buttons">

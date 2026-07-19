@@ -381,86 +381,51 @@ function normalizeOCRText(text) {
 
 class OCRController {
   constructor() {
-    this.ocrPromise = null;
-    this.ocr = null;
+    this.captionerPromise = null;
+    this.captioner = null;
   }
 
-  _getPaddleOCRURL() {
-    return 'https://cdn.jsdelivr.net/npm/@paddleocr/paddleocr-js@0.4.2/+esm';
-  }
-
-  _getModelAssets() {
-    return {
-      textDetectionModelName: 'PP-OCRv5_mobile_det',
-      textDetectionModelAsset: {
-        url: 'https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv5_mobile_det_infer.tar'
-      },
-      textRecognitionModelName: 'en_PP-OCRv5_mobile_rec',
-      textRecognitionModelAsset: {
-        url: 'https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/en_PP-OCRv5_mobile_rec_infer.tar'
-      }
-    };
-  }
-
-  _getOrtOptions() {
-    return {
-      backend: 'wasm',
-      numThreads: 1
-    };
+  _getTransformersURL() {
+    return 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/+esm';
   }
 
   getOCR() {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return Promise.reject(new Error('PaddleOCR.js はブラウザ環境でのみ動作します'));
+      return Promise.reject(new Error('OCR はブラウザ環境でのみ動作します'));
     }
-    if (!this.ocrPromise) {
-      this.ocrPromise = (async () => {
+    if (!this.captionerPromise) {
+      this.captionerPromise = (async () => {
         try {
-          const mod = await import(this._getPaddleOCRURL());
-          if (!mod || !mod.PaddleOCR) {
-            throw new Error('PaddleOCR.js の読み込みに失敗しました');
+          const mod = await import(this._getTransformersURL());
+          if (!mod || !mod.pipeline) {
+            throw new Error('Transformers.js の読み込みに失敗しました');
           }
-          const PaddleOCR = mod.PaddleOCR;
-          this.ocr = await PaddleOCR.create({
-            ...this._getModelAssets(),
-            textDetectionBatchSize: 1,
-            textRecognitionBatchSize: 1,
-            worker: false,
-            ortOptions: this._getOrtOptions()
-          });
-          return this.ocr;
+          const { pipeline, env } = mod;
+          env.allowLocalModels = false;
+          env.useBrowserCache = true;
+          if (env.backends && env.backends.onnx && env.backends.onnx.wasm) {
+            env.backends.onnx.wasm.numThreads = 1;
+          }
+          this.captioner = await pipeline('image-to-text', 'Xenova/trocr-small-handwritten');
+          return this.captioner;
         } catch (e) {
-          console.error('[OCR] PaddleOCR.create failed', e);
-          this.ocrPromise = null;
+          console.error('[OCR] TrOCR 初期化失敗', e);
+          this.captionerPromise = null;
           throw e;
         }
       })();
     }
-    return this.ocrPromise;
+    return this.captionerPromise;
   }
 
   async recognize(imageDataUrl) {
-    const ocr = await this.getOCR();
+    const captioner = await this.getOCR();
+    const img = await this._loadImage(imageDataUrl);
 
-    const input = await this._loadImage(imageDataUrl);
-    const predictParams = {
-      textDetThresh: 0.3,
-      textDetBoxThresh: 0.3,
-      textRecScoreThresh: 0.5
-    };
-    const [result] = await ocr.predict(input, predictParams);
-    const metrics = (result && result.metrics) || {};
-    const items = (result && result.items) || [];
-
-    if (!items.length) {
-      return { text: '', confidence: 0, metrics };
-    }
-
-    items.sort((a, b) => (b.score || 0) - (a.score || 0));
-    const best = items[0];
-    const text = (best.text || '').trim();
-    const score = typeof best.score === 'number' ? best.score : 0;
-    return { text, confidence: Math.round(score * 100), metrics };
+    const [output] = await captioner(img, { max_new_tokens: 32 });
+    const text = ((output && output.generated_text) || '').trim();
+    const confidence = text ? 100 : 0;
+    return { text, confidence, metrics: {} };
   }
 
   _loadImage(imageDataUrl) {
@@ -1269,7 +1234,7 @@ class UIController {
       const metrics = result.metrics || {};
       const rawText = (result.text || '(読み取れず)').trim();
       const normText = check.normalized || '(なし)';
-      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}% / detectedBoxes: ${metrics.detectedBoxes ?? '-'} / recognizedCount: ${metrics.recognizedCount ?? '-'}`;
+      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}%`;
       if (this.els.ocrDebug) {
         this.els.ocrDebug.textContent = debugText;
         this.els.ocrDebug.style.display = 'block';
