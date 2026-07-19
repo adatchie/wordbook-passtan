@@ -3,7 +3,7 @@
 /* ============================================================
    Wordbook Web 試作
    - 目的: UX・タイマー・難易度・筆跡PNG収集の検証
-   - 備考: ブラウザでのOCRは Tesseract.js でテスト実装。iPad版では Apple Vision を使用予定
+   - 備考: ブラウザでは Transformers.js + TrOCR を試験利用。iPad版では Apple Vision を使用予定
    ============================================================ */
 
 const STORAGE_KEYS = {
@@ -420,39 +420,16 @@ class OCRController {
 
   async recognize(imageDataUrl) {
     const captioner = await this.getOCR();
-    const img = await this._loadImage(imageDataUrl);
-    const canvas = this._imageToCanvas(img);
+    if (typeof imageDataUrl !== 'string' || !imageDataUrl.startsWith('data:image/')) {
+      throw new Error('OCRに渡す手書き画像を作成できませんでした');
+    }
 
-    const [output] = await captioner(canvas, { max_new_tokens: 32 });
+    // Transformers.js v2 は Canvas 要素ではなく、画像URL文字列を受け取る。
+    // Canvas から作った data URL をそのまま渡すと、ライブラリ側で画像として読み込める。
+    const [output] = await captioner(imageDataUrl, { max_new_tokens: 32 });
     const text = ((output && output.generated_text) || '').trim();
     const confidence = text ? 100 : 0;
     return { text, confidence, metrics: {} };
-  }
-
-  _loadImage(imageDataUrl) {
-    if (typeof imageDataUrl !== 'string' || !imageDataUrl.startsWith('data:')) {
-      return imageDataUrl;
-    }
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error('手書き画像の読み込みに失敗しました'));
-      img.src = imageDataUrl;
-    });
-  }
-
-  _imageToCanvas(img) {
-    if (img instanceof HTMLCanvasElement || img instanceof OffscreenCanvas) {
-      return img;
-    }
-    const width = img.naturalWidth || img.width || img.videoWidth || 1;
-    const height = img.naturalHeight || img.height || img.videoHeight || 1;
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, width, height);
-    return canvas;
   }
 }
 

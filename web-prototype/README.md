@@ -17,8 +17,8 @@ python -m http.server 8080
 
 ## 制限事項
 
-- ブラウザ内では OCR は行いません。iPad 版では Apple Vision を使用します。
-- ブラウザ用 OCR の結果は Apple Vision の品質根拠には使えません。
+- ブラウザでは Transformers.js + TrOCR による手書き英字OCRを試験利用します。初回はモデル取得に時間がかかります。
+- ブラウザ用OCRの精度はApple Visionの品質根拠には使えません。Web版では、入力から判定までの挙動確認に限定します。
 - 保護者 PIN、履歴、監査記録はブラウザの LocalStorage に保存されます。アプリ削除（サイトデータ消去）で失われます。
 
 ## 操作方法
