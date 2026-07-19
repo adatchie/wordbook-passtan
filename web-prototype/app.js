@@ -383,6 +383,25 @@ class OCRController {
   constructor() {
     this.workerPromise = null;
     this.readyPromise = null;
+    this.ocrParams = {
+      tessedit_pageseg_mode: (typeof Tesseract !== 'undefined' && Tesseract.PSM && Tesseract.PSM.SINGLE_WORD) ? Tesseract.PSM.SINGLE_WORD : '8',
+      tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyz'
+    };
+  }
+
+  _dictInitParams() {
+    return {
+      load_system_dawg: '0',
+      load_freq_dawg: '0',
+      load_punc_dawg: '0',
+      load_number_dawg: '0',
+      load_unambig_dawg: '0',
+      load_fixed_length_dawgs: '0',
+      tessedit_enable_doc_dict: '0',
+      tessedit_enable_dict_correction: '0',
+      language_model_penalty_non_dict_word: '0',
+      language_model_penalty_non_freq_dict_word: '0'
+    };
   }
 
   getWorker() {
@@ -398,42 +417,22 @@ class OCRController {
           await worker.loadLanguage('eng');
         }
         if (typeof worker.initialize === 'function') {
-          await worker.initialize('eng', 1, {
-            load_system_dawg: '0',
-            load_freq_dawg: '0',
-            load_punc_dawg: '0',
-            load_number_dawg: '0',
-            load_unambig_dawg: '0',
-            load_fixed_length_dawgs: '0',
-            tessedit_enable_dict_correction: '0',
-            language_model_penalty_non_dict_word: '0',
-            language_model_penalty_non_freq_dict_word: '0'
-          });
+          try {
+            await worker.initialize('eng', 0, this._dictInitParams());
+          } catch (legacyErr) {
+            console.warn('[OCR] Legacy engine not available, fallback to LSTM', legacyErr);
+            await worker.initialize('eng', 1, this._dictInitParams());
+          }
         }
-        await this._setWordParams(worker);
         return worker;
       });
     }
     return this.readyPromise;
   }
 
-  _psm() {
-    return (Tesseract.PSM && Tesseract.PSM.SINGLE_WORD) ? Tesseract.PSM.SINGLE_WORD : '8';
-  }
-
-  async _setWordParams(worker) {
-    if (typeof worker.setParameters === 'function') {
-      await worker.setParameters({
-        tessedit_pageseg_mode: this._psm(),
-        tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyz'
-      });
-    }
-  }
-
   async recognize(imageDataUrl) {
     const worker = await this.getWorker();
-    await this._setWordParams(worker);
-    const { data } = await worker.recognize(imageDataUrl);
+    const { data } = await worker.recognize(imageDataUrl, this.ocrParams);
     return { text: (data.text || '').trim(), confidence: data.confidence || 0 };
   }
 }
@@ -941,7 +940,7 @@ class UIController {
     this.els.feedback = $('#feedback');
     this.els.manualPassBtn = $('#btn-manual-pass');
     this.els.retryBtn = $('#btn-retry');
-    this.els.ocrBtn = $('#btn-ocr');
+    this.els.ocrDebug = $('#ocr-debug');
     this.els.savePngBtn = $('#btn-save-png');
     this.els.manualPassStatus = $('#manual-pass-status');
     this.els.previousList = $('#previous-list');
@@ -1045,10 +1044,9 @@ class UIController {
     $('#btn-parent-login').addEventListener('click', () => this.loginParent());
     $('#btn-parent-back').addEventListener('click', () => this.showScreen('screen-main'));
 
-    $('#btn-correct').addEventListener('click', () => this.onCorrect());
+    $('#btn-correct').addEventListener('click', () => this.onCorrect().catch(e => console.error(e)));
     this.els.manualPassBtn.addEventListener('click', () => this.onManualPass());
     this.els.retryBtn.addEventListener('click', () => this.onRetry());
-    this.els.ocrBtn.addEventListener('click', () => this.onOCR());
     this.els.savePngBtn.addEventListener('click', () => this.onSavePng());
     $('#btn-pause').addEventListener('click', () => {
       this.engine.suspend();
@@ -1081,7 +1079,8 @@ class UIController {
         }
         this.canvasCtrl.clear();
         this.els.correctBtn.textContent = 'できた！';
-        this.els.retryBtn.innerHTML = '× OCRが間違い判定（テスト）';
+        this.els.retryBtn.innerHTML = '× 間違いとして次へ';
+        if (this.els.ocrDebug) this.els.ocrDebug.style.display = 'none';
         this.updateQuestion(payload);
         this.updateTimer({ remainingMs: payload.remainingMs, ratio: 1 });
         this.setFeedback('', '');
@@ -1109,13 +1108,13 @@ class UIController {
         this.els.retryBtn.disabled = false;
         this.els.manualPassBtn.disabled = !this.engine.isManualPassAllowed();
         this.els.manualPassStatus.textContent = this.engine.isManualPassAllowed() ? '手動正解を使う' : '';
-        this.setFeedback('OCRは間違いと判定。手動正解するか、間違いとして次へ進んでください。', 'incorrect');
+        this.setFeedback('OCRは「間違い」と判定しました。手動正解するか、間違いとして次へ進んでください。', 'incorrect');
         break;
       case 'review':
         this.showScreen('screen-session');
         this.canvasCtrl.clear();
         this.els.correctBtn.textContent = '次へ';
-        this.els.retryBtn.innerHTML = '× OCRが間違い判定（テスト）';
+        this.els.retryBtn.innerHTML = '× 間違いとして次へ';
         this.els.manualPassBtn.disabled = true;
         this.els.savePngBtn.disabled = true;
         this.updateQuestion(payload);
@@ -1167,13 +1166,12 @@ class UIController {
     $('#btn-correct').disabled = !enabled;
     this.els.manualPassBtn.disabled = !enabled;
     this.els.retryBtn.disabled = !enabled;
-    if (this.els.ocrBtn) this.els.ocrBtn.disabled = !enabled;
     this.els.savePngBtn.disabled = !enabled;
     $('#btn-pause').disabled = !enabled;
     $('#draw-canvas').style.pointerEvents = enabled ? 'auto' : 'none';
   }
 
-  onCorrect() {
+  async onCorrect() {
     if (this.engine.session && this.engine.session.state === 'review') {
       this.engine.reviewNext();
       return;
@@ -1182,7 +1180,7 @@ class UIController {
       alert('まだ何も書かれていません');
       return;
     }
-    this.engine.markCorrect(false);
+    await this.runOCR();
   }
 
   onRetry() {
@@ -1193,23 +1191,27 @@ class UIController {
     }
   }
 
-  async onOCR() {
+  async runOCR() {
     if (!this.engine.session || this.engine.session.state !== 'acceptingInk') return;
-    if (!this.canvasCtrl.hasDrawing()) {
-      alert('まだ何も書かれていません');
-      return;
-    }
 
     this.engine.stopTimer();
     this.setControlsEnabled(false);
     this.setFeedback('OCR認識中…', '');
 
     try {
-      const image = this.canvasCtrl.renderToDataURL({ padding: 30, scale: 3, background: '#ffffff', stroke: '#000000' });
+      const image = this.canvasCtrl.renderToDataURL({ padding: 30, scale: 4, background: '#ffffff', stroke: '#000000' });
       const result = await this.ocr.recognize(image);
       console.log('[OCR]', result);
       const check = this.engine.checkOCR(result.text);
       const confidence = result.confidence || 0;
+
+      const rawText = (result.text || '(読み取れず)').trim();
+      const normText = check.normalized || '(なし)';
+      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}%`;
+      if (this.els.ocrDebug) {
+        this.els.ocrDebug.textContent = debugText;
+        this.els.ocrDebug.style.display = 'block';
+      }
 
       if (check.matched && confidence >= 60) {
         this.setFeedback(`OCR一致「${check.normalized}」（信頼度 ${Math.round(confidence)}%）`, 'correct');
@@ -1220,6 +1222,10 @@ class UIController {
       }
     } catch (e) {
       console.error(e);
+      if (this.els.ocrDebug) {
+        this.els.ocrDebug.textContent = 'OCRエラー: ' + (e.message || '不明');
+        this.els.ocrDebug.style.display = 'block';
+      }
       this.setFeedback('OCRエラー: ' + (e.message || '不明'), 'incorrect');
       this.setControlsEnabled(true);
     }

@@ -53,12 +53,12 @@
       <canvas id="draw-canvas" width="600" height="350" touch-action="none"></canvas>
 
       <div id="feedback" class="feedback hidden"></div>
+      <div id="ocr-debug" class="ocr-debug" style="display:none;"></div>
 
       <div class="session-controls">
-        <button id="btn-correct" class="primary">できた！</button>
+        <button id="btn-correct" class="primary">できた！（OCRで判定）</button>
         <button id="btn-manual-pass" class="manual">手動正解<br><small>（保護者・筆跡監査）</small></button>
-        <button id="btn-retry" class="secondary">× OCRが間違い判定（テスト）</button>
-        <button id="btn-ocr" class="secondary">OCRで判定（テスト）</button>
+        <button id="btn-retry" class="secondary">× 間違いとして次へ</button>
         <button id="btn-save-png" class="secondary">PNG保存</button>
         <button id="btn-pause" class="secondary">中断</button>
       </div>
