@@ -841,16 +841,28 @@ class GameEngine {
       if (onEnd) onEnd();
       return;
     }
+    let called = false;
+    const safeCall = () => {
+      if (called) return;
+      called = true;
+      clearTimeout(fallbackTimer);
+      try { window.speechSynthesis.cancel(); } catch(e) {}
+      if (onEnd) onEnd();
+    };
+    // iOS Chrome/Safari では onend が発火しないバグがあるため、
+    // 文字数から推定した時間後にフォールバックで次へ進む
+    const estimatedMs = Math.max(2000, text.length * 120 / (this.settings.ttsRate || 0.9));
+    const fallbackTimer = setTimeout(safeCall, estimatedMs + 500);
     try {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
       u.rate = this.settings.ttsRate;
-      u.onend = () => { if (onEnd) onEnd(); };
-      u.onerror = () => { if (onEnd) onEnd(); };
+      u.onend = safeCall;
+      u.onerror = safeCall;
       window.speechSynthesis.speak(u);
     } catch (e) {
-      if (onEnd) onEnd();
+      safeCall();
     }
   }
 
