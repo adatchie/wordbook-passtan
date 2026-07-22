@@ -447,11 +447,18 @@ class GameEngine {
     this.timerInterval = null;
   }
 
-  startSession(level, wordCount, setFilter) {
+  startSession(level, wordCount, setFilter, gradeFilter) {
     let enabled = this.wordsArray.map(w => w.id);
     // ブロック指定がある場合はフィルタ
     if (setFilter) {
       enabled = this.wordsArray.filter(w => w.tags && w.tags.includes(setFilter)).map(w => w.id);
+    }
+    // 級指定がある場合はさらにフィルタ
+    if (gradeFilter) {
+      enabled = enabled.filter(id => {
+        const w = this.wordsMap.get(id);
+        return w && w.tags && w.tags.includes(gradeFilter);
+      });
     }
     const count = Math.min(wordCount || this.settings.wordCount, enabled.length);
     const seed = Math.floor(Math.random() * 0x7fffffff);
@@ -1006,10 +1013,18 @@ class UIController {
     const grid = $('#set-grid');
     if (!grid) return;
     grid.innerHTML = '';
-    const circled = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬'];
-    for (let i = 1; i <= 13; i++) {
+    const circled = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮','⑯','⑰','⑱','⑲','⑳'];
+    const grade = this.selectedGrade || 'eiken-grade3';
+    // 選択中の級の単語だけからブロック番号を計算
+    const gradeWords = this.engine.wordsArray.filter(w => w.tags && w.tags.includes(grade));
+    const maxSet = Math.max(...gradeWords.map(w => {
+      const t = w.tags.find(x => x.startsWith('set'));
+      return t ? parseInt(t.slice(3)) : 0;
+    }).filter(n => n > 0));
+
+    for (let i = 1; i <= maxSet; i++) {
       const setTag = `set${i}`;
-      const count = this.engine.wordsArray.filter(w => w.tags && w.tags.includes(setTag)).length;
+      const count = gradeWords.filter(w => w.tags && w.tags.includes(setTag)).length;
       if (count === 0) continue;
       const btn = document.createElement('button');
       btn.className = 'set-card-btn';
@@ -1017,7 +1032,10 @@ class UIController {
       btn.addEventListener('click', () => {
         this.selectedSet = setTag;
         const title = $('#level-select-title');
-        if (title) title.textContent = `ブロック ${circled[i-1] || i}（${count}語）`;
+        if (title) {
+          const gradeLabel = grade === 'eiken-pre2' ? '準2級' : '3級';
+          title.textContent = `${gradeLabel} ${circled[i-1] || i}（${count}語）`;
+        }
         const overlay = $('#level-select-overlay');
         if (overlay) overlay.classList.remove('hidden');
       });
@@ -1027,17 +1045,27 @@ class UIController {
 
   bindEvents() {
     this.selectedSet = null;
+    this.selectedGrade = 'eiken-grade3';
+
+    // 級タブ切り替え
+    document.querySelectorAll('.grade-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.grade-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        this.selectedGrade = tab.dataset.grade;
+        this.renderSetGrid();
+      });
+    });
 
     // ブロック選択グリッドを構築
     this.renderSetGrid();
 
     // ブロックボタン → レベル選択オーバーレイ表示
     const levelOverlay = $('#level-select-overlay');
-    const levelTitle = $('#level-select-title');
 
     // レベル選択の開始
     const start = (lv) => {
-      this.engine.startSession(lv, this.settings.wordCount, this.selectedSet);
+      this.engine.startSession(lv, this.settings.wordCount, this.selectedSet, this.selectedGrade);
       levelOverlay.classList.add('hidden');
       this.showScreen('screen-session');
     };

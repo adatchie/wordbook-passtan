@@ -1,0 +1,1500 @@
+1. let : 〜させる、〜させてあげる
+2. decide : 決める、決意する
+3. train : 訓練する、トレーニングする／電車
+4. travel : 旅行する、移動する／旅行
+5. leave : 出発する、去る、残す、置き忘れる
+6. park : 駐車する／公園
+7. order : 注文する、命じる／注文、命令、順序
+8. lose : 負ける、失う、なくす
+9. move : 動き出す、引っ越す、感動させる
+10. pay : 支払う／給料
+11. wait : 待つ
+12. change : 変える、変わる／変化、おつり
+13. check : 点検する、確認する／小切手、伝票
+14. build : 建て築く、建てる
+15. worry : 心配する、気にする／心配
+16. plant : （植物を）植える／植物、工場
+17. practice : 練習する、実行する／練習、実践
+18. care : 気にかける、世話をする／世話、配慮
+19. describe : 描写する、詳しく述べる
+20. cost : （費用が）かかる／費用、コスト
+21. turn : 回る、曲がる、〜になる／順番、方向転換
+22. join : 参加する、加わる
+23. grow : 成長する、育てる、〜になる
+24. save : 救う、節約する、貯金する
+25. win : 勝利する、勝つ、（賞などを）獲得する
+26. pick : 選ぶ、摘む、拾う
+27. believe : 信じる、〜と思う
+28. report : 報告する、報道する／報告書、レポート
+29. forget : 忘れる
+30. hurt : 傷つける、痛む／怪我をした
+31. borrow : 借りる（無料で借りる場合）
+32. surprise : 驚かせる／驚き
+33. volunteer : ボランティアをする、自発的に申し出る／ボランティア
+34. carry : 運ぶ、持ち歩く
+35. set : 置く、設定する、沈む／セット
+36. invite : 招待する
+37. happen : （出来事が）起こる、生じる
+38. choose : 選ぶ
+39. guide : 案内する、導く／ガイド、案内人
+40. arrive : 到着する
+41. offer : 申し出る、提供する／申し出、オファー
+42. remember : 覚えている、思い出す
+43. cancel : 取り消す、キャンセルする
+44. repair : 修理する、直す／修理
+45. excuse : 許す、言い訳する／言い訳
+46. Internet : インターネット
+47. idea : 考え、アイデア
+48. information : 情報
+49. honey : ハチミツ、愛しい人（呼びかけ）
+50. fire : 火、火災／解雇する
+51. vegetable : 野菜
+52. situation : 状況、立場
+53. passage : 通路、文章の一節、通行
+54. event : 出来事、行事、イベント
+55. ma'am : 奥様、奥さん（女性への丁寧な呼びかけ）
+56. avocado : アボカド
+57. type : 型、タイプ、種類／タイピングする
+58. bakery : パン屋、製パン所
+59. future : 未来、将来／未来の
+60. exercise : 運動、練習問題／運動する
+61. bottle : 瓶、ボトル
+62. sign : 看板、標識、サイン／署名する
+63. service : サービス、接客、奉仕
+64. garbage : ごみ
+65. customer : 顧客、買い物客
+66. business : 仕事、ビジネス、事業
+67. trouble : 困ったこと、トラブル、悩み
+68. tour : 見学、ツアー、旅行
+69. race : 競争、レース、種族・人種
+70. environment : 環境、自然環境
+71. activity : 活動、アクティビティ
+72. other : 他の、別の／他のもの・人
+73. different : 異なる、違った
+74. important : 重要な、大切な
+75. special : 特別な、専門の
+76. enough : 十分な／十分に
+77. expensive : 高価な、値段が高い
+78. difficult : 難しい、困難な
+79. few : （数が）少ない、ほとんどない
+80. another : もう1つの、別の／もう1つのもの・人
+81. close : 近い、親しい／（動）閉じる
+82. own : 自分自身の／（動）所有する
+83. local : 地元の、地域の
+84. delicious : 美味しい
+85. foreign : 外国の、異国の
+86. however : しかしながら、けれども
+87. even : 〜でさえ、いっそう
+88. online : オンラインで［の］
+89. outside : 外で［に］、屋外で
+90. instead : 代わりに
+91. far : 遠くに、はるかに／遠い
+92. probably : たぶん、おそらく
+93. though : …だけれども、〜だが
+94. actually : 実際に、実は
+95. later : 後で、のちに
+96. yet : まだ（否定文）、もう（疑問文）
+97. quickly : 素早く、速く
+98. inside : 内側に［で］
+99. anyway : とにかく、いずれにしても
+100. while : …する間に、…の一方で
+101. taste : 〜の味がする／味、好み
+102. fix : 修理する、固定する、準備する
+103. hold : 開催する、持つ、掴む
+104. collect : 集める、収集する
+105. paint : 塗る、描く／絵の具
+106. copy : 写す、コピーする／複製、冊
+107. guess : 推測する、言い当てる／推測
+108. create : 創造する、作り出す
+109. allow : 許可する、許す
+110. return : 戻る、返す／返品、帰宅
+111. suggest : 提案する、示唆する
+112. relax : リラックスする、寛ぐ
+113. add : 加える、足す
+114. reserve : 予約する、確保する
+115. design : 設計する、デザインする／デザイン
+116. follow : 従う、〜の後について行く
+117. attract : 惹きつける、魅了する
+118. pass : 通過する、手渡す、（試験に）合格する
+119. miss : 恋しく思う、（乗り物に）乗り遅れる、逃す
+120. recommend : 推薦する、勧める
+121. serve : （食事などを）出す、仕える、役立つ
+122. rent : 賃借りする、レンタルする／家賃
+123. wake : 目をさまさせる、起きる
+124. bake : （パンやケーキを）焼く
+125. prepare : 準備する、用意する
+126. damage : 損害を与える／損害、ダメージ
+127. bear : 耐える、産む／クマ
+128. seem : 〜のように思われる・見える
+129. explain : 説明する
+130. cause : 引き起こす、原因となる／原因
+131. fill : 満たす、いっぱいにする
+132. kill : 殺す、（時間を）つぶす
+133. dress : 服を着る／ドレス、服
+134. throw : 投げる
+135. notice : 気づく／通知、掲示
+136. result : 結果／（結果として）生じる
+137. front : 前部、正面／前の
+138. recipe : レシピ、調理法
+139. area : 地域、面積、分野
+140. visitor : 訪問者、来客
+141. clothes : 服、衣服
+142. plastic : プラスチック、ビニール／プラスチック製の
+143. chance : 機会、可能性、偶然
+144. sale : 販売、売上、特売・セール
+145. skill : 技術、技能、スキル
+146. presentation : プレゼンテーション、発表
+147. flight : （飛行機の）便、飛行
+148. wheel : 車輪、ハンドル
+149. product : 製品、生産物
+150. meal : 食事
+151. seed : 種、種子
+152. land : 土地、陸地／（飛行機が）着陸する
+153. medicine : 薬、医学
+154. reservation : 予約
+155. space : 空間、宇宙、スペース
+156. apartment : アパート、マンション
+157. insect : 昆虫、虫
+158. mall : ショッピングモール
+159. smartphone : スマートフォン
+160. grade : 学年、成績、等級
+161. police : 警察
+162. prize : 賞、賞品
+163. market : 市場、マーケット
+164. fair : 見本市、フェア／公平な
+165. section : 部門、区画、セクション
+166. price : 価格、値段
+167. fact : 事実、現実
+168. department : 部署、学科、（デパートの）売り場
+169. rule : 規則、ルール／支配する
+170. nature : 自然、性格、本質
+171. island : 島
+172. goods : 商品、品物
+173. firefighter : 消防士
+174. person : 人、人間
+175. husband : 夫
+176. item : 品目、項目、アイテム
+177. neighbor : 近所の人、隣人
+178. orchestra : オーケストラ、管弦楽団
+179. gate : 門、搭乗口
+180. healthy : 健康的な、健康な
+181. true : 本物の、真実の
+182. afraid : 恐れて、怖がって
+183. dangerous : 危険な
+184. wild : 野生の、自然のままの
+185. safe : 安全な／金庫
+186. past : 過去の／過去、昔
+187. available : 入手可能な、利用できる、空いている
+188. successful : 成功した、上々の
+189. perfect : 完璧な、完全な
+190. less : より少ない、より小さく
+191. easily : 簡単に、容易に
+192. else : その他に、ほかに
+193. abroad : 外国へ［で］、海外に
+194. recently : 最近、近頃
+195. nowadays : 最近では、近頃は
+196. somewhere : どこかに［で］
+197. forward : 前へ、前方へ
+198. although : …だけれども
+199. without : 〜なしで、〜を持たずに
+200. through : 〜を通して、〜を通り抜けて
+201. exchange : 交換する、両替する／交換
+202. drop : 落ちる、落とす／一滴、減少
+203. climb : 登る、登ること
+204. smell : 〜のにおいがする／におい
+205. date : 日付、デート／〜とデートする
+206. introduce : 紹介する、導入する
+207. recycle : リサイクルする、再利用する
+208. perform : 上演する、行う、演奏する
+209. wish : 願う、望む／願い
+210. marry : 〜と結婚する
+211. express : 表現する／急行の
+212. hide : 隠す、隠れる
+213. protect : 保護する、守る
+214. receive : 受け取る
+215. steal : 盗む
+216. interview : 面接する、インタビューする／面接
+217. feed : 〜に餌［食物］を与える
+218. spread : 広げる、広がる
+219. deliver : 配達する、届ける
+220. search : 探す、検索する／捜索
+221. bite : かむ、かみつく
+222. trade : 貿易する、取引する／貿易
+223. announce : 発表する、告知する
+224. produce : 生産する、製造する
+225. share : 共有する、分け合う
+226. draw : （線で絵や図を）描く、引き寄せる
+227. wood : 木、木材、森
+228. reason : 理由、根拠
+229. experience : 経験、体験／〜を経験する
+230. bill : 請求書、勘定書、紙幣
+231. discount : 割引
+232. form : 用紙、形、形態／〜を形作る
+233. owner : 持ち主、所有者
+234. side : 側、側面、味方
+235. community : 地域社会、共同体
+236. guest : 客、ゲスト
+237. performance : 上演、演奏、実績、性能
+238. tool : 道具、工具
+239. century : 世紀、100年
+240. dessert : デザート
+241. poem : 詩
+242. government : 政府、政治
+243. novel : 小説／斬新な
+244. professor : 教授
+245. project : 計画、プロジェクト
+246. charity : 慈善、チャリティー
+247. million : 100万
+248. instrument : 楽器、器具、道具
+249. mistake : 間違い、ミス
+250. earth : 地球、土、陸地
+251. address : 住所、アドレス／〜に話しかける、取り組む
+252. co-worker : 同僚
+253. cleaner : 掃除する人、洗剤、クリーニング店
+254. match : 試合、勝負、マッチ／調和する
+255. fan : ファン、扇風機、うちわ
+256. grandparent : 祖父母（祖父または祖母）
+257. president : 大統領、社長
+258. wallpaper : 壁紙
+259. health : 健康、健康状態
+260. Europe : ヨーロッパ
+261. technology : 科学技術、テクノロジー
+262. suit : スーツ／〜に似合う、都合が良い
+263. note : メモ、ノート、音符／〜に注意する
+264. score : 得点、スコア／得点する
+265. gift : 贈り物、プレゼント、才能
+266. rest : 休憩、休息、残り／休む
+267. view : 眺め、見解、視界
+268. crowd : 群衆、人ごみ
+269. jazz : ジャズ
+270. direction : 方向、方角、指示
+271. topic : 話題、トピック
+272. wallet : 財布
+273. piece : 1つの破片、作品、個
+274. package : 小包、パッケージ
+275. teammate : チームメイト、仲間
+276. playground : 運動場、遊園地、遊び場
+277. planet : 惑星
+278. salon : サロン、美容室
+279. accident : 事故、偶然
+280. actor : 俳優、役者
+281. traditional : 伝統的な
+282. Russian : ロシアの、ロシア人の／ロシア語
+283. human : 人間の、人間的な／人間
+284. cheap : 安い、安っぽい
+285. either : （2つのうち）どちらか一方の
+286. professional : 専門的な、プロの／プロ
+287. similar : 似ている、同様の
+288. part-time : パートタイムの、非常勤の
+289. whole : 全体の、すべての／全体
+290. frozen : 凍った、フリーズした
+291. central : 中央の、中心的な
+292. loud : （音が）大きい、騒々しい
+293. magic : 魔法、奇術／魔法の
+294. pretty : かなり／可愛らしい
+295. certainly : 確かに、もちろん
+296. finally : ついに、最後に
+297. alone : 1人で、単独で
+298. therefore : それゆえに、したがって
+299. lately : 最近、近頃
+300. might : 〜かもしれない
+301. stand : 立つ、立ち上がる、耐える／スタンド
+302. reach : 到達する、着く、手を伸ばす
+303. promise : 約束する／約束
+304. film : 映画、フィルム／〜を撮影する
+305. fit : （サイズや形が）合う、適している／健康な
+306. celebrate : 祝う、お祝いする
+307. stretch : 伸ばす、体を伸ばす、広がる
+308. cover : 覆う、かばう、網羅する／カバー、蓋
+309. develop : 発達させる、開発する、発展する
+310. solve : 解決する、（問題を）解く
+311. discover : 発見する、気づく
+312. continue : 続ける、続く
+313. face : 直面する、〜に面する／顔
+314. shape : 形作る／形、姿
+315. print : 印刷する、プリントする／印刷物
+316. lend : 貸す
+317. realize : 〜に気づく、〜を実現する
+318. wonder : 〜かしらと思う、不思議に思う／驚き
+319. die : 死ぬ、枯れる
+320. pull : 引っ張る、引く
+321. push : 押す
+322. shake : 振る、揺れる、握手する
+323. agree : 同意する、賛成する
+324. mean : 〜を意味する、〜のつもりで言う
+325. mind : 気にする、嫌がる／心、精神
+326. improve : 改善する、上達する、よくなる
+327. include : 〜を含む、含める
+328. enter : 〜に入る、入力する
+329. communicate : 意思疎通する、伝える
+330. tourist : 観光客、旅行者
+331. center : 中心、中央、センター
+332. attention : 注意、注目
+333. couple : 1対、カップル、夫婦
+334. license : 免許証、ライセンス
+335. kid : 子供／冗談を言う
+336. desert : 砂漠
+337. invention : 発明、発明品
+338. chemistry : 化学、相性
+339. neighborhood : 近所、地域
+340. officer : 警官、役員、将校
+341. moment : 瞬間、短い時間
+342. rock : 岩、ロック音楽
+343. cart : カート、台車
+344. grass : 芝生、草
+345. traffic : 交通、交通量
+346. staff : 職員、スタッフ
+347. snake : ヘビ
+348. grocery : 食料雑貨店、食料品
+349. fee : 料金、謝礼、授業料
+350. clothing : 衣類、服
+351. training : 訓練、トレーニング
+352. yoga : ヨガ
+353. truck : トラック
+354. forest : 森林、森
+355. flavor : 風味、味
+356. weight : 体重、重さ
+357. subway : 地下鉄
+358. discovery : 発見
+359. oven : オーブン
+360. ID : 身分証明書
+361. beginner : 初心者、ビギナー
+362. cough : 咳／咳をする
+363. firework : 花火
+364. flag : 旗、国旗
+365. housework : 家事
+366. ant : アリ
+367. ground : 地面、運動場
+368. schedule : 予定、スケジュール／予定を立てる
+369. noise : 騒音、音
+370. storm : 嵐、暴風雨
+371. shelf : 棚
+372. elevator : エレベーター
+373. Pacific : 太平洋／太平洋の
+374. careful : 注意深い、慎重な
+375. public : 公の、公共の／大衆
+376. British : イギリスの、英国人の
+377. friendly : 親しみやすい、親切な
+378. native : 母国の、その土地生まれの
+379. excellent : 素晴らしい、優秀な
+380. nearby : 近くの／近くに
+381. huge : 巨大な、非常に大きい
+382. main : 主要な、主な
+383. fresh : 新鮮な、新しい
+384. usual : いつのもの、通常の
+385. boring : 退屈な、つまらない
+386. colorful : 色鮮やかな、カラフルな
+387. scary : 恐ろしい、怖い
+388. spicy : 辛い、スパイシーな
+389. nervous : 神経質な、緊張して
+390. convenient : 便利な、都合が良い
+391. wide : 広い、幅の広い
+392. elementary : 初歩の、基本の
+393. once : かつて、1度／〜するとすぐに
+394. anymore : もはや〜ない
+395. almost : ほとんど、ほぼ
+396. carefully : 注意深く、慎重に
+397. luckily : 幸運にも、運良く
+398. outdoors : 屋外で、野外で
+399. clearly : はっきりと、明確に
+400. against : 〜に反対して、〜に立てかけて
+401. connect : 接続する、つなぐ
+402. suppose : 〜と思う、仮定する
+403. fail : 失敗する、（試験に）落ちる
+404. display : 展示する、表示する／展示
+405. compete : 競う、競技する
+406. explore : 探検する、調査する
+407. raise : 持ち上げる、育てる、集める
+408. contact : 連絡を取る／連絡、接触
+409. attend : 出席する、通う
+410. remove : 取り除く、移動させる
+411. complete : 完成させる／完全な
+412. gain : 得る、増す
+413. balance : バランスを取る／均衡
+414. decorate : 飾る、装飾する
+415. gather : 集まる、集める
+416. bother : 悩ます、迷惑をかける
+417. retire : 引退する、退職する
+418. hate : 嫌う、憎む
+419. hug : 抱きしめる／ハグ
+420. support : 支援する、支える／支援
+421. touch : 触れる、感動させる／接触
+422. scare : 怖がらせる、脅かす
+423. hire : 雇う、レンタルする
+424. expect : 予期する、期待する
+425. publish : 出版する、公表する
+426. attack : 攻撃する／攻撃
+427. measure : 測る、計測する／対策
+428. discuss : 話し合う、議論する
+429. examination : 試験、検査
+430. research : 研究、調査／研究する
+431. amount : 量、総額
+432. announcement : 発表、アナウンス
+433. screen : 画面、スクリーン
+434. advice : 助言、アドバイス
+435. distance : 距離
+436. shopper : 買い物客
+437. director : 監督、取締役、ディレクター
+438. technique : 技術、手法
+439. average : 平均／平均の
+440. gallery : ギャラリー、画廊
+441. convenience : 便利さ、都合
+442. application : 申請、応募、アプリ
+443. state : 州、状態、国家／述べる
+444. amusement : 娯楽、面白さ
+445. sight : 光景、視力、見ること
+446. matter : 問題、事柄／重要である
+447. sauce : ソース
+448. bottom : 底、最下部
+449. corner : 角（かど）、コーナー
+450. principal : 校長／主要な
+451. homestay : ホームステイ
+452. jellyfish : クラゲ
+453. percent : パーセント、割
+454. lifestyle : ライフスタイル、生活様式
+455. career : 経歴、職歴、キャリア
+456. goal : 目標、ゴール、得点
+457. chef : シェフ、料理長
+458. fashion : 流行、ファッション、やり方
+459. relative : 親戚、親族／相対的な
+460. credit : 信用、クレジット、履修単位
+461. challenge : 挑戦、課題／〜に挑む
+462. luck : 運、幸運
+463. backyard : 裏庭
+464. emergency : 緊急事態、非常事態
+465. favor : 親切な行為、お願い、好意
+466. Olympics : オリンピック
+467. fever : 熱、発熱、熱狂
+468. campus : 構内、キャンパス
+469. photographer : 写真家、カメラマン
+470. bar : バー、酒場、棒
+471. laundry : 洗濯物、洗濯
+472. refrigerator : 冷蔵庫
+473. modern : 現代の、近代的な
+474. common : 共通の、一般的な、ありふれた
+475. extra : 余分の、追加の／余分なもの
+476. national : 国家の、全国的な、国立の
+477. real : 本物の、現実の
+478. comfortable : 快適な、心地よい
+479. possible : 可能な、あり得る
+480. recent : 最近の、近頃の
+481. least : 最も少ない、最小の
+482. normal : 標準の、通常の、普通の
+483. international : 国際的な、国家間の
+484. asleep : 眠って、睡眠中で
+485. active : 活発な、積極的な
+486. lonely : 孤独な、寂しい
+487. regular : 定期的な、規則正しい
+488. bright : 明るい、頭が良い
+489. correct : 正しい、正確な／〜を訂正する
+490. relaxing : リラックスできる、寛げる
+491. unfortunately : あいにく、残念ながら
+492. downtown : 繁華街へ［で］、市街地に［で］
+493. mostly : 主に、大抵は
+494. nearly : ほぼ、もう少しで
+495. heavily : 激しく、重く
+496. anytime : いつでも
+497. except : 〜を除いては
+498. behind : 〜の後ろに、〜に遅れて
+499. neither : どちらも〜ない
+500. none : どれも［誰も］〜ない
+501. lay : 〜を横たえる、〜を置く、（卵を）産む
+502. block : 塞ぐ、遮る／ブロック、街区
+503. hunt : 狩る、探す／狩り
+504. grill : 網焼きにする、焼く／焼き網
+505. count : 数える、重要である
+506. guard : 守る、警備する／警備員
+507. lift : 持ち上げる、持ち上がる／エレベーター
+508. hit : 打つ、当たる、襲う／ヒット
+509. pour : 注ぐ、（雨が）激しく降る
+510. confuse : 混乱させる、困惑させる
+511. press : 押す、圧迫する／報道陣
+512. broadcast : 放送する／放送
+513. lie : 横たわる、横になる／嘘をつく
+514. review : 復習する、再検討する／復習
+515. quit : やめる、辞める
+516. remind : 思い出させる、気付かせる
+517. separate : 分離する、分ける／分かれた
+518. wipe : 拭く、拭き取る
+519. rescue : 救助する、救う／救助
+520. translate : 翻訳する
+521. fight : 戦う、喧嘩する／戦い
+522. invitation : 招待、招待状
+523. trash : ごみ
+524. success : 成功
+525. safety : 安全、無事
+526. tradition : 伝統、慣習
+527. tournament : トーナメント、勝ち抜き戦
+528. spot : 場所、地点、斑点
+529. title : タイトル、題名、肩書
+530. science fiction : SF
+531. weekday : 平日
+532. spider : クモ
+533. sausage : ソーセージ
+534. seafood : 魚介類、シーフード
+535. boyfriend : 彼氏、ボーイフレンド
+536. diver : ダイバー、潜水士
+537. trick : 芸、いたずら／欺く
+538. memory : 記憶、思い出
+539. article : 記事、品物、冠詞
+540. membership : 会員資格、会員数
+541. factory : 工場
+542. coupon : クーポン券、優待券
+543. coach : コーチ、指導者
+544. battery : 電池、バッテリー
+545. interest : 興味、関心、利息
+546. knee : 膝（ひざ）
+547. character : 性格、登場人物、文字
+548. detail : 詳細、細部
+549. effort : 努力
+550. climate : 気候
+551. middle : 中央、真ん中／中央の
+552. purpose : 目的、意図
+553. danger : 危険、危険性
+554. knowledge : 知識
+555. brand : ブランド、銘柄
+556. importance : 重要性、大切さ
+557. instruction : 指示、指導、取扱説明書
+558. network : ネットワーク、網
+559. championship : 選手権、優勝
+560. closet : クローゼット、押入れ
+561. audience : 観客、聴衆
+562. cash : 現金
+563. photography : 写真撮影、写真術
+564. headphone : ヘッドホン
+565. journey : 旅、旅行
+566. debate : 討論、ディベート／討論する
+567. heater : 暖房器具、ヒーター
+568. dentist : 歯科医師、歯医者
+569. platform : プラットホーム、壇
+570. flour : 小麦粉
+571. hero : 英雄、ヒーロー、主人公
+572. lobster : ロブスター、伊勢エビ
+573. makeup : 化粧、メイク
+574. nut : 木の実、ナッツ
+575. path : 小道、経路
+576. several : いくつかの、数個の
+577. valuable : 貴重な、価値のある
+578. scared : 怖がって、怯えて
+579. ancient : 古代の、非常に古い
+580. electronic : 電子の、電子工学の
+581. elderly : 年配の、お年寄りの
+582. certain : 確かな、ある（特定の）
+583. harmful : 有害な
+584. electric : 電気の、電動の
+585. female : 女性の、雌の
+586. daily : 毎日の、日々の
+587. cute : かわいい
+588. helpful : 役立つ、助けになる
+589. private : 私的な、個人の
+590. basic : 基本的な、基礎的な
+591. Atlantic : 大西洋の
+592. male : 男性の、雄の
+593. advanced : 進んだ、高度な
+594. additional : 追加の、さらなる
+595. especially : 特に、とりわけ
+596. nicely : 上手に、親切に、良く
+597. indoors : 室内で、屋内で
+598. afterward : その後、後で
+599. deeply : 深く、非常に
+600. whenever : 〜するときはいつでも
+601. control : 支配する、制御する／支配、制御
+602. belong : （〜に）属する
+603. destroy : 破壊する、ぶち壊す
+604. accept : 受け入れる、受諾する
+605. disappoint : 失望させる、がっかりさせる
+606. greet : 挨拶する、出迎える
+607. disturb : 邪魔する、乱す
+608. advise : 助言する、アドバイスする
+609. breathe : 呼吸する、息をする
+610. combine : 結合させる、組み合わせる
+611. crash : 衝突する、墜落する／衝突、墜落
+612. earn : （お金などを）稼ぐ、得る
+613. hang : 掛ける、吊るす
+614. cheer : 歓声をあげる、元気づける／歓声
+615. escape : 逃げる、免れる／逃亡、脱出
+616. waste : 浪費する、無駄にする／無駄、廃棄物
+617. lead : 導く、率いる、〜に通じる
+618. replace : 取り替える、取って代わる
+619. require : 必要とする、要求する
+620. invent : 発明する、考案する
+621. organize : 組織する、準備する、整理する
+622. pack : 荷造りする、詰める／パック
+623. upset : うろたえさせる／動揺した
+624. respect : 尊敬する、尊重する／尊敬
+625. select : 選ぶ、選定する
+626. phrase : フレーズ、言い回し
+627. sense : 感覚、センス、意味
+628. stair : 階段
+629. scarf : スカーフ、マフラー
+630. risk : 危険、リスク／危険を冒す
+631. teenager : 10代の若者
+632. strength : 強さ、力、体力
+633. semester : 学期
+634. teamwork : チームワーク、協力
+635. secret : 秘密／秘密の
+636. sunshine : 日光、日差し
+637. silence : 静寂、沈黙
+638. value : 価値、価格
+639. employee : 従業員、社員
+640. expert : 専門家、達人
+641. energy : 活力、エネルギー
+642. adult : 大人、成人／成人の
+643. author : 著者、作者
+644. athlete : 運動選手、アスリート
+645. Egypt : エジプト
+646. boss : 上司、ボス
+647. equipment : 装備、器具、設備
+648. advantage : 利点、強み、有利
+649. airline : 航空会社
+650. engine : エンジン
+651. ability : 能力、才能
+652. aisle : 通路
+653. entrance : 入口、入場、入学
+654. conversation : 会話、対話
+655. custom : 慣習、風習、（複数形で）税関
+656. button : ボタン
+657. choice : 選択、選択肢
+658. counter : カウンター、台
+659. discussion : 議論、話し合い
+660. adventure : 冒険
+661. anniversary : 記念日
+662. avenue : 大通り、アベニュー
+663. explorer : 探検家
+664. essay : 小論文、エッセイ
+665. fitness : 健康、フィットネス、適合
+666. aquarium : 水族館
+667. headache : 頭痛
+668. channel : チャンネル、海峡
+669. harvest : 収穫／〜を収穫する
+670. bonus : ボーナス、特典
+671. electronics : 電子工学、電子機器
+672. file : ファイル、綴じ込み
+673. herb : 薬草、ハーブ
+674. serious : 深刻な、真面目な
+675. wealthy : 裕福な、お金持ちの
+676. terrible : ひどい、恐ろしい
+677. quiet : 静かな
+678. round : 丸い
+679. crowded : 混雑した
+680. amazing : 素晴らしい、驚くべき
+681. double : 2倍の
+682. dental : 歯科の、歯の
+683. classical : クラシックの、古典的な
+684. awake : 目を覚まして
+685. equal : 等しい、平等の
+686. alive : 生きて
+687. audio : 音声の
+688. brand-new : 真新しい
+689. Christian : キリスト教の／キリスト教徒
+690. giant : 巨大な／巨人
+691. rather : かなり、むしろ
+692. twice : 2度、2倍
+693. quite : かなり、まったく
+694. sometime : いつか、ある時
+695. ahead : 前方に、事前に
+696. completely : 完全に、すっかり
+697. exactly : 正確に、まさに
+698. forever : 永遠に
+699. whatever : 〜するもの［こと］は何でも
+700. whoever : 〜する人は誰でも
+701. trust : 信頼する／信頼
+702. warn : 警告する
+703. weigh : 重さを量る、体重がある
+704. judge : 判断する／裁判官
+705. ring : 鳴る、鳴らす／指輪
+706. memorize : 暗記する
+707. reply : 返答する／返事
+708. sail : 航行する、船で行く／帆
+709. wave : 手を振る／波
+710. imagine : 想像する
+711. shoot : 撃つ、シュートする
+712. skip : 飛ばす、スキップする
+713. spell : つづる／呪文
+714. swing : 振る、揺れる／ブランコ
+715. wrap : 包む、巻きつける
+716. ignore : 無視する、見落とす
+717. paste : 貼り付ける／のり
+718. knock : ノックする、叩く／ノック音
+719. encourage : 励ます、促進する
+720. decrease : 減少する、減らす／減少
+721. access : アクセスする／アクセス
+722. avoid : 避ける、回避する
+723. concern : 関心事、心配／心配させる
+724. contain : 含む、収容する
+725. manage : 管理する、なんとか〜する
+726. approach : 接近する、取り組む／接近
+727. beat : 打ち負かす、打つ／拍子
+728. depend : 頼る、〜次第である
+729. disappear : 消える、姿を消す
+730. act : 行動する、演じる／行為
+731. castle : 城
+732. salmon : サケ（鮭）
+733. method : 方法、方式
+734. site : 場所、敷地、ウェブサイト
+735. tablet : タブレット、錠剤
+736. opinion : 意見、考え
+737. instance : 例、事実
+738. instructor : 指導者、インストラクター
+739. roll : 巻き、役割／転がる
+740. scene : 場面、現場、景色
+741. style : スタイル、様式、やり方
+742. policy : 政策、方針、保険証券
+743. rush : 急ぎ、ラッシュ／大急ぎで行く
+744. sample : 見本、サンプル
+745. partner : パートナー、相棒
+746. keyboard : キーボード、鍵盤
+747. tutor : 家庭教師、個別指導教員
+748. position : 位置、立場、職
+749. puzzle : パズル、謎
+750. nation : 国家、国民
+751. scenery : 風景、景色
+752. highway : 幹線道路、高速道路
+753. lime : ライム、石灰
+754. objection : 反対、異議
+755. ketchup : ケチャップ
+756. rainbow : 虹
+757. imagination : 想像力
+758. puppy : 子犬
+759. row : 列／こぐ
+760. horn : 角（つの）、クラクション
+761. impression : 印象、感銘
+762. leather : 革、革製品
+763. lifeguard : 救助員、ライフガード
+764. palace : 宮殿
+765. photocopy : コピー／〜をコピーする
+766. pole : 柱、棒、極
+767. politician : 政治家
+768. residence : 住宅、邸宅、居住
+769. spice : スパイス、香辛料
+770. total : 合計、全体／合計の
+771. version : 版、バージョン
+772. nephew : 甥（おい）
+773. statue : 像、彫像
+774. soldier : 兵士、軍人
+775. patient : 患者／忍耐強い
+776. various : さまざまな、いろいろな
+777. laptop : ノートパソコン
+778. violent : 暴力的な、激しい
+779. noisy : うるさい、騒々しい
+780. personal : 個人の、個人的な
+781. unique : 独特の、ユニークな
+782. tight : きつい、きっちりした
+783. mixed : 混ざった、複雑な
+784. typical : 典型的にな、いつもの
+785. independent : 独立した、自立した
+786. nonsmoking : 禁煙の
+787. wooden : 木製の、木造の
+788. narrow : 狭い、細い
+789. absent : 欠席の、不在の
+790. sincerely : 心から、誠実に
+791. originally : 元々は、最初は
+792. suddenly : 突然、急に
+793. poorly : 乏しく、下手（へた）に
+794. straight : まっすぐに／まっすぐな
+795. upstairs : 階上へ、2階へ
+796. hopefully : うまくいけば、願わくは
+797. physically : 身体的に、物理的に
+798. anywhere : どこかに、どこにも
+799. beyond : 〜を越えて、〜の向こうに
+800. below : 〜の下に、以下で
+801. chat : 雑談する、チャットする
+802. advertise : 宣伝する、広告を出す
+803. appreciate : 感謝する、正しく評価する
+804. exhibit : 展示する／展示品
+805. arrange : 手配する、配置する
+806. freeze : 凍る、凍らせる
+807. download : ダウンロードする
+808. handle : 扱う、処理する
+809. apologize : 謝罪する、お詫びする
+810. cycle : 自転車に乗る／周期
+811. dislike : 嫌う、嫌悪する
+812. exist : 存在する、生きていく
+813. float : 浮かぶ、漂う
+814. flow : 流れる／流れ
+815. arrest : 逮捕する／逮捕
+816. bark : 吠える
+817. dig : 掘る、探求する
+818. divide : 分割する、分ける
+819. flash : 閃光を放つ／閃光
+820. babysit : 子守をする
+821. force : 強制する／力
+822. increase : 増える、増やす／増加
+823. reduce : 減らす、縮小する
+824. prevent : 防ぐ、妨げる
+825. lower : 下げる、低くする
+826. rise : 上がる、昇る／上昇
+827. limit : 制限する／限界
+828. recognize : 認識する、認める
+829. remain : 残る、〜のままでいる
+830. promote : 促進する、昇進させる
+831. request : 要請する／リクエスト
+832. observe : 観察する、遵守する
+833. overcome : 克服する、打ち勝つ
+834. astronaut : 宇宙飛行士
+835. disease : 病気、疾患
+836. chemical : 科学物質／化学の
+837. education : 教育
+838. biology : 生物学
+839. ballet : バレエ
+840. generation : 世代、生成
+841. blanket : 毛布
+842. gasoline : ガソリン
+843. clinic : 診療所、クリニック
+844. clerk : 事務員、店員
+845. engineer : エンジニア、技術者
+846. boarding : 搭乗、乗車
+847. document : 文書、書類
+848. emotion : 感情、感動
+849. congratulation : 祝賀、お祝い
+850. ceremony : 儀式、式典
+851. billion : 10億
+852. assistant : 助手、アシスタント
+853. habit : 習慣、癖
+854. fisherman : 漁師、釣り人
+855. atmosphere : 雰囲気、大気
+856. commercial : コマーシャル／商業の
+857. designer : デザイナー、設計者
+858. envelope : 封筒
+859. figure : 数字、姿、人物／計算する
+860. beauty : 美しさ、美
+861. branch : 支店、枝
+862. diet : ダイエット、日常の食事
+863. edge : 縁（ふち）、端
+864. enemy : 敵
+865. graduation : 卒業、卒業式
+866. calculator : 電卓、計算機
+867. attitude : 態度、姿勢
+868. disaster : 災害、惨事
+869. forecast : 予報、予測
+870. furniture : 家具
+871. angle : 角度、角
+872. beetle : カブトムシ、甲虫
+873. bookshelf : 本棚
+874. comment : コメント／意見を述べる
+875. happiness : 幸せ、幸福
+876. nationality : 国籍
+877. fat : 太った／脂肪
+878. empty : 空の、中身のない
+879. confident : 自信がある、確信している
+880. exact : 正確な、きっちりした
+881. dead : 死んでいる
+882. curious : 好奇心が強い、珍しい
+883. familiar : よく知られている、親しい
+884. fantastic : 素晴らしい
+885. alike : 似ている、同様に
+886. calm : 穏やかな、落ち着いた
+887. delicate : 繊細な、デリケートな
+888. flat : 平らな／アパート
+889. following : 次の、以下の
+890. handsome : ハンサムな
+891. balanced : バランスの取れた
+892. brave : 勇敢な、勇気のある
+893. careless : 不注意な、軽率な
+894. foolish : 愚かな、バカな
+895. freezing : 凍りつくような、極寒の
+896. gradually : 徐々に、だんだんと
+897. eventually : 最終的に、結局は
+898. besides : 〜の他に、さらに／それに
+899. apart : 離れて、バラバラに
+900. hardly : ほとんど〜ない
+901. insist : 主張する、強く要求する
+902. refresh : リフレッシュさせる、気分を一新する
+903. melt : 溶ける、溶かす
+904. seek : 探す、求める
+905. slide : すべる、スライドする
+906. knit : 編む、ニット
+907. resemble : 〜に似ている
+908. suffer : 苦しむ、損害を受ける
+909. surf : サーフィンをする、ネットを閲覧する
+910. stick : 貼り付ける、くっつく／棒
+911. trap : 罠にかける／罠
+912. switch : 切り替える、交換する／スイッチ
+913. specialize : 専門にする、専攻する
+914. supply : 供給する／供給、品物
+915. survive : 生き残る、生き延びる
+916. succeed : 成功する、継承する
+917. tear : 引き裂く／涙
+918. vote : 投票する／投票、票
+919. lock : 鍵をかける／鍵、錠
+920. harm : 害する、傷つける／害、危害
+921. award : 授与する／賞
+922. consider : 考慮する、よく考える
+923. release : 解放する、公開する、発売する
+924. appear : 現れる、〜のように見える
+925. researcher : 研究者
+926. metal : 金属
+927. manager : 支配人、マネージャー、管理者
+928. organization : 組織、団体
+929. mystery : 謎、ミステリー
+930. passenger : 乗客
+931. population : 人口、住民
+932. image : 印象、画像、イメージ
+933. level : 水準、レベル、段階
+934. opportunity : 機会、チャンス
+935. mayor : 市長、町長
+936. quality : 質、品質、特性
+937. signal : 信号、合図
+938. liquid : 液体／液体の
+939. majority : 大多数、過半数
+940. location : 位置、場所、ロケーション
+941. pain : 痛み、苦痛
+942. reality : 現実、リアリティ
+943. rental : 賃貸、レンタル／レンタルの
+944. midnight : 真夜中、午前零時
+945. influence : 影響、影響力／〜に影響を与える
+946. restroom : お手洗い、洗面所
+947. shelter : 避難所、シェード、保護区
+948. sheet : 用紙、シーツ
+949. operation : 手術、操作、事業・運用
+950. photograph : 写真
+951. printer : プリンター、印刷機
+952. rhythm : リズム、調子
+953. shrimp : エビ
+954. souvenir : お土産、記念品
+955. receipt : 領収書、レシート
+956. lecture : 講義、講演
+957. rank : 階級、ランク、順位
+958. horizon : 地平線、水平線
+959. purse : ハンドバッグ、財布
+960. harmony : 調和、ハーモニー
+961. lawyer : 弁護士
+962. origin : 起源、生まれ、由来
+963. pause : 休止、一時停止
+964. popularity : 人気、評判
+965. praise : 称賛、ほめること
+966. pride : 誇り、自尊心
+967. reaction : 反応、反動
+968. rumor : 噂（うわさ）
+969. shadow : 影
+970. smoker : 喫煙者
+971. laughter : 笑い、笑い声
+972. miracle : 奇跡
+973. niece : 姪（めい）
+974. oyster : カキ（貝）
+975. pace : ペース、歩調
+976. penalty : 罰則、ペナルティ、罰金
+977. prayer : 祈り
+978. projector : プロジェクター、投影機
+979. sketch : スケッチ、写生、概要
+980. particular : 特定の、特別な
+981. necessary : 必要な、不可欠な
+982. natural : 自然の、天然の、当然の
+983. smart : 賢い、頭が良い、スマートな
+984. negative : 否定的な、消極的な、マイナスの
+985. ordinary : 普通の、ありふれた
+986. simple : 簡単な、単純な
+987. salty : しょっぱい、塩分を含んだ
+988. polite : 礼儀正しい、丁寧な
+989. pure : 純粋な、綺麗な
+990. shy : 内気な、恥ずかしがり屋の
+991. honest : 正直な、誠実な
+992. instant : 即座の、インスタントの
+993. mad : 怒って、夢中になって
+994. hidden : 隠された、秘密の
+995. roast : ローストした、焼いた
+996. immediately : 直ちに、すぐに
+997. naturally : 自然に、当然
+998. rarely : めったに〜ない
+999. shortly : まもなく、手短に
+1000. seldom : めったに〜ない
+1001. argue : 議論する、言い争う
+1002. concentrate : 集中する
+1003. delay : 遅らせる、延期する
+1004. major : 主要な、重大な／専攻する
+1005. achieve : 達成する、成し遂げる
+1006. lack : 不足している、〜がない／不足
+1007. refer : 言及する、参照する
+1008. burn : 燃える、燃やす、火傷する
+1009. sink : 沈む、沈める
+1010. consist : （〜から）成る、構成される
+1011. spill : こぼす、こぼれる
+1012. mention : 〜に言及する、口にする
+1013. admit : 認める、入場を許可する
+1014. blow : 風が吹く、吹き飛ばす
+1015. pretend : 〜のふりをする
+1016. regret : 後悔する、残念に思う
+1017. treatment : 治療、取り扱い
+1018. survey : 調査、アンケート
+1019. temple : 寺院、お寺
+1020. uniform : 制服、ユニフォーム
+1021. agency : 代理店、機関
+1022. temperature : 温度、体温
+1023. trend : 傾向、流行、トレンド
+1024. surface : 表面、水面
+1025. throat : 喉（のど）
+1026. profit : 利益、儲け
+1027. workplace : 職場
+1028. symbol : 象徴、シンボル、記号
+1029. web : クモの巣、ウェブ
+1030. track : 足跡、小道、トラック
+1031. task : 課題、仕事、タスク
+1032. spelling : つづり、スペリング
+1033. summary : 要約、まとめ
+1034. thunderstorm : 激しい雷雨
+1035. diamond : ダイヤモンド
+1036. manual : 説明書、マニュアル／手動の
+1037. stomach : 胃、お腹
+1038. theme : テーマ、主題
+1039. thought : 考え、思考
+1040. victory : 勝利
+1041. sword : 剣、刀
+1042. volume : 音量、量、巻
+1043. effect : 効果、影響、結果
+1044. material : 材料、素材、資料
+1045. statement : 声明、主張、明細書
+1046. coast : 海岸、沿岸
+1047. fear : 恐怖、恐れ
+1048. countryside : 田舎、地方
+1049. issue : 問題、課題、発行
+1050. condition : 状態、条件、体調
+1051. crime : 犯罪
+1052. degree : 度、程度、学位
+1053. sunlight : 日光、日の光
+1054. capital : 首都、資本、大文字
+1055. behavior : 行動、振る舞い
+1056. childhood : 幼少期、子供時代
+1057. rate : 割合、速度、料金
+1058. ancestor : 祖先、先祖
+1059. earthquake : 地震
+1060. freedom : 自由
+1061. citizen : 市民、国民
+1062. entertainment : 娯楽、エンターテインメント
+1063. frame : 額縁、フレーム、骨組み
+1064. fare : （乗り物の）運賃
+1065. fault : 責任、欠点、過失
+1066. feature : 特徴、目玉／〜を特徴とする
+1067. honor : 名誉、栄誉
+1068. role : 役割、役
+1069. stressful : ストレスの多い、精神的にきつい
+1070. thin : 薄い、細い、痩せた
+1071. worth : 〜の価値がある
+1072. tough : たくましい、困難な、頑丈な
+1073. well-known : 有名な、よく知られた
+1074. thick : 厚い、太い、濃い
+1075. suitable : 適した、ふさわしい
+1076. square : 正方形の、四角い／正方形、広場
+1077. full-time : 常勤の、フルタイムの
+1078. unfriendly : 不親切な、よそよそしい
+1079. likely : 〜しそうな、可能性が高い
+1080. official : 公式の、正式な
+1081. clear : 明確な、澄んだ、晴れた
+1082. ill : 病気の、気分の悪い
+1083. unusual : 普通でない、珍しい
+1084. specific : 特定の、具体的な
+1085. opposite : 反対側の、真逆の
+1086. pleasant : 心よい、楽しい、感じのよい
+1087. awful : 恐ろしい、ひどい
+1088. direct : 直接の、直行の／〜を指揮する
+1089. raw : 生の、加工されていない
+1090. totally : 完全に、まったく
+1091. surprisingly : 驚くほど、意外にも
+1092. wrongly : 誤って、不当に
+1093. further : さらに遠くへ、さらに進んで
+1094. indeed : 確かに、本当に
+1095. extremely : 極めて、非常に
+1096. perhaps : おそらく、ひょっとすると
+1097. unless : …でない限り、…もし〜でなければ
+1098. unlike : 〜と違って、〜らしくない
+1099. within : 〜以内に、〜の内部で
+1100. toward : 〜の方へ、〜に向けて
+1101. take care of ~ : 〜の世話をする、〜を処理する
+1102. take care : 体に気をつける、注意する
+1103. a few ~ : 2、3の〜、いくつかの〜
+1104. used to do : 以前はよく〜したものだ、かつて〜だった
+1105. be used to doing : 〜することに慣れている
+1106. these days : 最近では、近頃
+1107. too ... to do : あまりに…なので〜できない
+1108. the way ... : …するやり方、…するように
+1109. because of ~ : 〜のために、〜が原因で
+1110. get A to do : Aに〜させる、Aに〜してもらう
+1111. help A (to) do : Aが〜するのを手伝う・助ける
+1112. pick up ~ : 〜を拾い上げる、〜（人）を車で迎に行く
+1113. pay for ~ : 〜の代金を支払う
+1114. such as ~ : （例えば）〜のような
+1115. so ... that ... : とても…なので…
+1116. each other : お互い
+1117. at first : 最初は、はじめのうちは
+1118. do A good : Aのためになる、体に良い
+1119. thank A for B : BのことでAに感謝する
+1120. be worried about ~ : 〜のことを心配している
+1121. in the past : 過去に、昔は
+1122. live on ~ : 〜を主食にする、〜（収入など）で暮らす
+1123. put out ~ : 〜（火など）を消す、〜を外に出す
+1124. far away : 遠く離れて
+1125. look like ... : …のように見える、…似ている
+1126. in fact : 実際は、実は
+1127. find out ~ : 〜（事実など）を見つけ出す、知る
+1128. look up ~ : 〜（単語など）を調べる
+1129. clean up (~) : （〜を）掃除する、片付ける
+1130. take part in ~ : 〜に参加する
+1131. keep (on) doing : 〜し続ける
+1132. put on ~ : 〜を身につける、着用する
+1133. get married (to A) : （Aと）結婚する
+1134. be afraid of ~ : 〜を恐れている、怖がる
+1135. have time to do : 〜する時間がある
+1136. have enough A to do : 〜するのに十分なAがある
+1137. work for ~ : 〜（会社など）で働いている
+1138. work on ~ : 〜に取り組む、〜に手を加える
+1139. pick A up : Aを車で拾う、車に乗せる
+1140. the first time ... : 初めて…するとき
+1141. right away : すぐに
+1142. in order to do : 〜するために
+1143. on time : 時間通りに、定刻に
+1144. see (to it) that ... : …するように取り計らう・気をつける
+1145. happen to do : たまたま〜する
+1146. far from ~ : 〜どころではない、〜からほど遠い
+1147. be ready for ~ : 〜の準備ができている
+1148. make a reservation : 予約する
+1149. help A with B : AのBを手伝う
+1150. get lost : 道に迷う
+1151. have a baby : 赤ん坊を産む
+1152. what to do : 何をすべきか
+1153. the last A to do : 最も〜しそうにないA
+1154. instead of ~ : 〜の代わりに
+1155. take A for B : AをBだと思い込む・誤解する
+1156. as well : 〜もまた、同様に
+1157. turn off ~ : 〜（電気・栓など）を消す、止める
+1158. come out : 出てくる、（本などが）出版される
+1159. next to ~ : 〜の隣に
+1160. have fun : 楽しむ
+1161. a piece of ~ : 1つの〜、1片の〜
+1162. so that A can [will] do : Aが〜できるように
+1163. on sale : 販売されて、特売で
+1164. get better : （病気・状況などが）良くなる、快方に向かう
+1165. throw away ~ : 〜を投げ捨てる、捨てる
+1166. do well : うまくいく、好成績を収める
+1167. even if ... : たとえ…だとしても
+1168. one of the ~ A : 最も〜なAのうちの1つ
+1169. where to do : どこで［へ］〜すべきか
+1170. search A for B : Bを求めてAを探す
+1171. thanks to ~ : 〜のおかげで
+1172. be different from ~ : 〜と異なっている
+1173. sound like ~ : 〜のように聞こえる、〜のようだ
+1174. on foot : 徒歩で
+1175. except for ~ : 〜を除いては
+1176. take off ~ : 〜を脱ぐ、（飛行機などが）離陸する
+1177. get ready for ~ : 〜の準備をする
+1178. think about doing : 〜しようかと考える
+1179. for free : 無料で
+1180. a number of ~ : たくさんの〜、いくつかの〜
+1181. ask for ~ : 〜を求める、請求する
+1182. set up ~ : 〜を設立する、設置する、準備する
+1183. come up with ~ : 〜（思い・計画など）を思いつく
+1184. at least : 少なくとも
+1185. a variety of ~ : さまざまな〜、いろいろな〜
+1186. look after ~ : 〜の世話をする
+1187. along with ~ : 〜と一緒に、〜に加えて
+1188. go into ~ : 〜に入る、〜（研究など）を始める
+1189. take place : （行事などが）行われる、開催される
+1190. give up (~) : （〜を）あきらめる、やめる
+1191. a couple of ~ : 2つの〜、2・3の〜
+1192. translate A into B : AをBに翻訳する
+1193. on earth : 一体全体、ちっとも
+1194. be in the hospital : 入院している
+1195. decide on ~ : 〜に決める
+1196. (all) by oneself : 独力で、一人で
+1197. try on ~ : 〜を試着する
+1198. show A how to do : Aに〜の仕方を教える・見せる
+1199. on one's [the] way (to ~) : （〜への）途中で
+1200. spend A on B : BにA（時間・お金）を費やす
+1201. than usual : いつもより
+1202. walk around ~ : 〜のまわりを歩き回る
+1203. up to ~ : 〜まで、〜次第で
+1204. be similar to ~ : 〜に似ている
+1205. fall asleep : 眠りに落ちる、寝入る
+1206. so far : 今のところ、これまでは
+1207. A as well as B : BだけでなくAも
+1208. be sure to do : 必ず〜する
+1209. graduate from ~ : 〜を卒業する
+1210. be popular with [among] ~ : 〜に人気がある、親しまれている
+1211. in the end : 結局は、最後に
+1212. not A but B : AではなくB
+1213. together with ~ : 〜と一緒に
+1214. for the first time : 初めて
+1215. feel like doing : 〜したい気がする
+1216. apply for ~ : 〜に申し込む、応募する
+1217. due to ~ : 〜のために、〜が原因で
+1218. make out ~ : 〜を理解する、見分ける、作成する
+1219. by the time ... : …する時までに（は）
+1220. check in : チェックインする、搭乗手続きをする
+1221. look over ~ : 〜に目を通す、〜を調べる
+1222. keep up with ~ : 〜に遅れずについていく
+1223. on (the [an]) average : 平均して
+1224. come down : 落ちる、下がる、（病気などに）かかる
+1225. go over ~ : 〜を詳しく調べる、復習する
+1226. run after ~ : 〜を追いかける
+1227. turn down ~ : 〜を断る、〜（の音量など）を下げる
+1228. introduce A to B : AをBに紹介する
+1229. get on ~ : 〜（乗り物）に乗る
+1230. add A to B : AをBにつけ加える、足す
+1231. complain about ~ : 〜について不平・不満を言う
+1232. have time for ~ : 〜のための時間がある
+1233. hear from ~ : 〜から連絡をもらう・便りがある
+1234. line up : 一列に並ぶ、並べる
+1235. take over ~ : 〜を引き継ぐ、乗っ取る
+1236. as soon as ... : …するとすぐに
+1237. call (A) back : （Aに）折り返し電話する
+1238. go to the doctor : 病院に行く、医者の診察を受ける
+1239. in a group : グループで、集団で
+1240. not only A but (also) B : AだけでなくBも
+1241. shake hands : 握手をする
+1242. tell A how to do : Aに〜の仕方を教える
+1243. see if ... : …かどうか確かめる・見る
+1244. for instance : 例えば
+1245. fill out ~ : 〜（書類など）に記入する
+1246. would like A to do : Aに〜してもらいたい
+1247. grow up to be ~ : 成長して〜になる
+1248. by mistake : 間違えて、誤って
+1249. take [have] a break : 休憩する
+1250. as ~ as possible : できるだけ〜
+1251. make sure (that) ... : 確実にする、必ず…するようにする
+1252. ... enough to do : 〜するのに十分…
+1253. prefer A to B : BよりAを好む
+1254. go ahead : 先に進む、どうぞ
+1255. the same A as B : Bと同じA
+1256. for fun : 楽しみに、面白半分で
+1257. stop by (~) : （〜に）立ち寄る
+1258. cut down ~ : 〜を削減する、切り倒す
+1259. at a [one] time : 一度に、一回で
+1260. before long : まもなく、やがて
+1261. by chance : 偶然に
+1262. exchange A for B : AをBと交換する
+1263. in addition to ~ : 〜に加えて
+1264. make a mistake : 間違える、ミスをする
+1265. in a hurry : 急いで
+1266. in time (for ~) : （〜に）間に合って
+1267. A, B, and so on : A、Bなど、〜など
+1268. be responsible for ~ : 〜に責任がある、〜を担当している
+1269. by nature : 生まれつき、本質的に
+1270. on purpose : 故意に、わざと
+1271. at the (very) moment : ちょうど今、その瞬間に
+1272. send out ~ : 〜を発信する、送り出す
+1273. put down ~ : 〜を置く、書き留める
+1274. look forward to doing : 〜することを楽しみに待つ
+1275. be in trouble : 困っている、トラブルに巻き込まれている
+1276. all (the) year round [around] : 一年中
+1277. be about to do : まさに〜しようとしている
+1278. be typical of ~ : 〜に典型的である、〜らしい
+1279. by the side of ~ : 〜のそばに
+1280. come to life : 活気づく、意識を取り戻す
+1281. compare A with [to] B : AをBと比較する
+1282. cut off ~ : 〜を切り取る、遮断する
+1283. do A a favor : Aの願いを聞き入れる
+1284. do the laundry : 洗濯をする
+1285. drop by (~) : （〜に）ひょっこり立ち寄る
+1286. focus on ~ : 〜に集中する、焦点を当てる
+1287. go out : 外出する、（火などが）消える
+1288. lose sight of ~ : 〜を見失う
+1289. put off ~ : 〜を延期する、後回しにする
+1290. show off ~ : 〜を見せびらかす、誇示する
+1291. stay away from ~ : 〜から離れている、近づかない
+1292. as you know : ご存じの通り
+1293. be over : 終わる
+1294. make friends with A : Aと友達になる
+1295. be made from ~ : 〜（原料）から作られている
+1296. run away : 逃げる、走り去る
+1297. a pair of ~ : 1足［組・対］の〜
+1298. once a week : 週に1回
+1299. fall down : 転ぶ、倒れる
+1300. in a minute : すぐに
+1301. on one's [the] way home : 帰宅途中で
+1302. across from ~ : 〜の向かい側に
+1303. after a while : しばらくして
+1304. be away : 不在である、離れている
+1305. get out of ~ : 〜から外へ出る、〜から抜け出す
+1306. have a chance to do : 〜する機会［チャンス］がある
+1307. run into ~ : 〜に偶然出会う、〜に衝突する
+1308. sleep well : よく眠る
+1309. some other time : また別の機会に
+1310. take A out of B : AをBから取り出す・出す
+1311. suffer from ~ : 〜（病気など）に苦しむ、悩む
+1312. in particular : 特に
+1313. be based on ~ : 〜に基づいている
+1314. bring back ~ : 〜を持ち帰る、思い出す
+1315. no longer ~ : もはや〜ない
+1316. depend on ~ : 〜に頼る、〜次第である
+1317. get rid of ~ : 〜を処分する、を取り除く
+1318. leave for ~ : 〜に向けて出発する
+1319. turn on ~ : 〜（電気など）をつける
+1320. result in ~ : 結果として〜になる
+1321. be related to ~ : 〜に関連している、親戚関係にある
+1322. all the time : 絶えず、いつも
+1323. for a while : しばらくの間
+1324. by the end of ~ : 〜の終わりまでに
+1325. hold on : （電話を切らずに）待つ、しっかりつかまる
+1326. fill up ~ : 〜を満たす、いっぱいにする
+1327. in other words : 言い換えれば、つまり
+1328. in turn : 順番に、今度は
+1329. point out ~ : 〜を指摘する
+1330. after all : 結局は、だって〜だから
+1331. for long : 長い間
+1332. go wrong : うまくいかない、故障する
+1333. in line : 一列になって
+1334. in return (for ~) : （〜の）お返しに、返礼として
+1335. take [have] a look at ~ : 〜を（ちょっと）見る
+1336. whether ... or not : …かどうか
+1337. be proud of ~ : 〜を誇りに思っている
+1338. be sold out : 売り切れている
+1339. be full of ~ : 〜で満ちている、がいっぱいだ
+1340. get in ~ : 〜に入る、（車などに）乗り込む
+1341. get together : 集まる
+1342. by far : はるかに、ずば抜けて
+1343. for sure : 確実に、間違いなく
+1344. let ~ down : 〜を失望させる、がっかりさせる
+1345. make up one's mind : 決心する
+1346. take after ~ : 〜（親など）に似ている
+1347. turn out to be ~ : （結局）〜であることが判明する
+1348. with luck : 運が良ければ
+1349. be against ~ : 〜に反対している
+1350. check out : 〜をチェックする、確認する、チェックアウトする
+1351. (just) in case : 念のため、万が一に備えて
+1352. in public : 人前で、公然と
+1353. look through ~ : 〜に目を通す、〜を通して見る
+1354. now that ... : 今やもう…なので
+1355. of one's own : 自分自身の
+1356. plenty of ~ : たくさんの〜
+1357. take one's time : 時間をかける、焦らずやる
+1358. be sick in bed : 病気で寝ている
+1359. give A a ride : Aを（車などに）乗せてあげる
+1360. how far ... : どのくらいの距離…
+1361. come true : （夢などが）実現する、叶う
+1362. at [in] the end of ~ : 〜の終わりに
+1363. It takes (A) ... to do : （Aが）〜するのに…がかかる
+1364. make [give] a speech : 演説［スピーチ］をする
+1365. something ... to do : 〜するための何か…
+1366. show A around ~ : Aに〜を案内する
+1367. against one's will : 意に反して、本心に反して
+1368. appeal to ~ : 〜に訴える、〜にアピールする
+1369. at (the) most : 多くとも、せいぜい
+1370. at length : ついに、長々と
+1371. at the risk of ~ : 〜の危険を冒して
+1372. be capable of doing : 〜する能力がある、〜できる
+1373. be free from ~ : 〜がない、〜を免れている
+1374. be grateful for ~ : 〜に感謝している
+1375. be independent of ~ : 〜から独立している
+1376. be jealous of ~ : 〜をねたんでいる、〜を羨ましがっている
+1377. be out of order : 故障している
+1378. be out of the question : 論外である、不可能である
+1379. be poor [bad] at ~ : 〜が苦手である、下手である
+1380. be sick of ~ : 〜にうんざりしている、飽きている
+1381. be sure of [about] ~ : 〜を確信している
+1382. break up ~ : （関係などを）解消する、別れる、解散する
+1383. bring up ~ : 〜を育て上げる、（話題などを）持ち出す
+1384. by heart : 暗記して、心から
+1385. care about ~ : 〜を気にする、〜に関心を持つ
+1386. do without ~ : 〜なしで済ませる
+1387. feel at home : くつろぐ、気兼ねなく感じる
+1388. feel sorry for ~ : 〜を気の毒に思う、かわいそうに思う
+1389. for a change : 気晴らしに、たまには
+1390. get away from ~ : 〜から逃れる、離れる
+1391. head for ~ : 〜へ向かう
+1392. in a sense : ある意味では、ある点では
+1393. in contrast : 対照的に
+1394. in shape : 体調が良くて、体型が整って
+1395. keep an eye on ~ : 〜から目を離さない、〜を見守る
+1396. keep one's promise [word] : 約束を守る
+1397. look up to ~ : 〜を尊敬する
+1398. lose control : 制御できなくなる、感情を乱す
+1399. lose one's balance : バランス（均衡）を崩す
+1400. make oneself at home : くつろぐ
+1401. make sense : 意味が通る、理解できる、理にかなっている
+1402. none of one's business : 〜には関係ないこと、余計なお世話
+1403. do nothing but do : 〜してばかりいる、〜する以外に何もしない
+1404. on demand : 要求に応じて
+1405. out of date : 時代遅れの、賞味期限切れの
+1406. participate in ~ : 〜に参加する
+1407. pass by ~ : 〜のそばを通り過ぎる
+1408. reach out for ~ : 〜に（手を）伸ばす、求めようとする
+1409. separate A from B : AをBから分離する・引き離す
+1410. speak up : はっきりと話す、声を大きくして言う
+1411. stand by ~ : 〜を支える、〜の味方をする、待機する
+1412. stand out : 目立つ、際立つ
+1413. succeed in ~ : 〜に成功する
+1414. take a bite : （一口）かじる、一口食べる
+1415. The point is (that) ... : 要するに…だ、大事なのは…だ
+1416. to the point : 適切で、要を得て
+1417. with care : 慎重に、注意深く
+1418. without fail : 必ず、間違いなく
+1419. another ~ minutes : あと〜分
+1420. as if [though] ... : まるで…であるかのように
+1421. be busy with ~ : 〜で忙しい
+1422. be ready to do : 〜する準備ができている、快く〜する
+1423. be tired from ~ : 〜で疲れている
+1424. dress up : 正装する、ドレスアップする
+1425. eat out : 外食する
+1426. either A or B : AかBのどちらか
+1427. for a minute : ちょっとの間
+1428. go on a tour : ツアーに行く、旅行に出かける
+1429. go out of business : 廃業する、倒産する
+1430. have a sore throat : 喉が痛い
+1431. make an appointment with A : Aと（会う・診察などの）約束をする
+1432. make sense of ~ : 〜を理解する
+1433. no more than ~ : わずか〜だけ
+1434. on one's own : 自力で、一人で
+1435. over and over (again) : 何度も繰り返して
+1436. put away ~ : 〜を片付ける
+1437. see A off : Aを見送る
+1438. stay in bed : （病気などで）寝ている、床についている
+1439. take [have] a seat : 着席する、座る
+1440. try [do] one's best : 最善を尽くす、全力を尽くす
+1441. when to do : いつ〜すべきか
+1442. lead to ~ : 〜につながる、〜を引き起こす
+1443. provide A with B : AにBを供給する・与える
+1444. hand in ~ : 〜を提出する
+1445. be aware of ~ : 〜に気づいている、〜を知っている
+1446. carry out ~ : 〜を実行する、成し遂げる
+1447. as a result of ~ : 〜の結果として
+1448. as long as ... : …である限り、…でありさえすれば
+1449. be involved in ~ : 〜に関与している、〜に巻き込まれている
+1450. break down : 故障する、（精神的に）参ってしまう
+1451. in conclusion : 結論として、最後に
+1452. in [at] the beginning of ~ : 〜の始めに
+1453. on business : 仕事で、出張で
+1454. all the way : ずっと、はるばる
+1455. run out of ~ : 〜を使い果たす、切らす
+1456. be injured : 負傷する、怪我をする
+1457. by accident : 偶然に、誤って
+1458. come across ~ : 〜に偶然出会う・出くわす
+1459. in charge of ~ : 〜を担当して、〜の責任者で
+1460. make an effort : 努力する
+1461. pay attention to ~ : 〜に注意を払う
+1462. rely on ~ : 〜に頼る、〜を信頼する
+1463. be tired of ~ : 〜に飽きている、うんざりしている
+1464. change one's mind : 考えを変える、前言を翻す
+1465. a bunch of ~ : たくさんの〜、一束の〜
+1466. ahead of ~ : 〜の前に、〜より進んで
+1467. be expected to do : 〜すると予想されている、〜することを期待されている
+1468. be impressed with ~ : 〜に感銘を受ける、感動する
+1469. be in danger : 危険な状態にある
+1470. be said to be ~ : 〜と言われている
+1471. be satisfied with ~ : 〜に満足している
+1472. be unable to do : 〜することができない
+1473. catch up with ~ : 〜に追いつく
+1474. from now on : これからは、今後
+1475. get along with ~ : 〜と上手くやっていく、仲良くする
+1476. get over ~ : 〜を乗り越える、克服する、回復する
+1477. go through ~ : 〜を経験する、通過する
+1478. had better do : 〜したほうがよい、〜しなさい
+1479. hope for ~ : 〜を望む、期待する
+1480. in advance : あらかじめ、事前に
+1481. in reality : 実際には、現実は
+1482. in spite of ~ : 〜にもかかわらず
+1483. in the long run : 結局は、長い目で見れば
+1484. lead A to B : AをBへ導く
+1485. leave ~ behind : 〜を置き去りにする、残していく
+1486. look out : 気をつける、警戒する
+1487. make a difference : 影響を与える、大きな違いを生む
+1488. make up for ~ : 〜の埋め合わせをする、補う
+1489. mean to do : 〜するつもりである、故意に〜する
+1490. on board ~ : （船や飛行機などに）乗って
+1491. play an important role in ~ : 〜で重要な役割を果たす
+1492. stand for ~ : 〜を表す、〜を象徴する、〜を支持する
+1493. start with ~ : 〜から始まる、〜から始める
+1494. take A back to B : AをBへ連れ戻す・持ち帰る
+1495. to one's surprise : 驚いたことに
+1496. watch out for ~ : 〜に気をつける、警戒する
+1497. stay up late : 夜更かしする
+1498. as usual : いつものように
+1499. cheer A up : Aを元気づける、励ます
+1500. name A after B : BにちなんでAと名付ける
