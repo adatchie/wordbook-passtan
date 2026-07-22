@@ -18,17 +18,29 @@
         「できた！」を押すと自動判定します。うまく認識しなければ「手動正解」または「書き直す」で対応してください。
       </p>
       <div class="menu-buttons">
-        <button id="btn-start-l1" class="primary">Lv1 開始</button>
-        <button id="btn-start-l2" class="primary">Lv2 開始</button>
-        <button id="btn-start-l3" class="primary">Lv3 開始</button>
+        <button id="btn-resume" class="secondary hidden">セッションを再開</button>
+        <button id="btn-clear-session" class="danger hidden">中断データを消す</button>
         <button id="btn-missed-l1" class="primary missed hidden">Lv1 間違い直し</button>
         <button id="btn-missed-l2" class="primary missed hidden">Lv2 間違い直し</button>
         <button id="btn-missed-l3" class="primary missed hidden">Lv3 間違い直し</button>
-        <button id="btn-resume" class="secondary hidden">セッションを再開</button>
-        <button id="btn-clear-session" class="danger hidden">中断データを消す</button>
         <button id="btn-settings" class="secondary">設定</button>
         <button id="btn-history" class="secondary">履歴</button>
         <button id="btn-parent" class="secondary">保護者</button>
+      </div>
+
+      <h2>単語ブロックを選択</h2>
+      <div id="set-grid" class="set-grid"></div>
+
+      <div id="level-select-overlay" class="level-select-overlay hidden">
+        <div class="level-select-card">
+          <h3 id="level-select-title">ブロック 1</h3>
+          <div class="level-select-buttons">
+            <button id="btn-start-l1" class="primary">Lv1 書き写し</button>
+            <button id="btn-start-l2" class="primary">Lv2 部分隠し</button>
+            <button id="btn-start-l3" class="primary">Lv3 完全記憶</button>
+          </div>
+          <button id="btn-level-cancel" class="secondary">戻る</button>
+        </div>
       </div>
       <div id="active-session-info" class="info hidden"></div>
     </section>

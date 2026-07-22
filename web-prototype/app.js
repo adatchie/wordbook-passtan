@@ -447,8 +447,12 @@ class GameEngine {
     this.timerInterval = null;
   }
 
-  startSession(level, wordCount) {
-    const enabled = this.wordsArray.map(w => w.id);
+  startSession(level, wordCount, setFilter) {
+    let enabled = this.wordsArray.map(w => w.id);
+    // ブロック指定がある場合はフィルタ
+    if (setFilter) {
+      enabled = this.wordsArray.filter(w => w.tags && w.tags.includes(setFilter)).map(w => w.id);
+    }
     const count = Math.min(wordCount || this.settings.wordCount, enabled.length);
     const seed = Math.floor(Math.random() * 0x7fffffff);
     const order = seededShuffle(enabled, seed).slice(0, count);
@@ -998,13 +1002,52 @@ class UIController {
     });
   }
 
+  renderSetGrid() {
+    const grid = $('#set-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const circled = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬'];
+    for (let i = 1; i <= 13; i++) {
+      const setTag = `set${i}`;
+      const count = this.engine.wordsArray.filter(w => w.tags && w.tags.includes(setTag)).length;
+      if (count === 0) continue;
+      const btn = document.createElement('button');
+      btn.className = 'set-card-btn';
+      btn.innerHTML = `<span class="set-num">${circled[i-1] || i}</span><span class="set-count">${count}語</span>`;
+      btn.addEventListener('click', () => {
+        this.selectedSet = setTag;
+        const title = $('#level-select-title');
+        if (title) title.textContent = `ブロック ${circled[i-1] || i}（${count}語）`;
+        const overlay = $('#level-select-overlay');
+        if (overlay) overlay.classList.remove('hidden');
+      });
+      grid.appendChild(btn);
+    }
+  }
+
   bindEvents() {
+    this.selectedSet = null;
+
+    // ブロック選択グリッドを構築
+    this.renderSetGrid();
+
+    // ブロックボタン → レベル選択オーバーレイ表示
+    const levelOverlay = $('#level-select-overlay');
+    const levelTitle = $('#level-select-title');
+
+    // レベル選択の開始
     const start = (lv) => {
-      this.engine.startSession(lv, this.settings.wordCount);
+      this.engine.startSession(lv, this.settings.wordCount, this.selectedSet);
+      levelOverlay.classList.add('hidden');
+      this.showScreen('screen-session');
     };
     $('#btn-start-l1').addEventListener('click', () => start(1));
     $('#btn-start-l2').addEventListener('click', () => start(2));
     $('#btn-start-l3').addEventListener('click', () => start(3));
+    $('#btn-level-cancel').addEventListener('click', () => {
+      levelOverlay.classList.add('hidden');
+      this.selectedSet = null;
+    });
 
     const startMissed = (lv) => {
       if (!this.engine.startSessionWithMissed(lv)) {
