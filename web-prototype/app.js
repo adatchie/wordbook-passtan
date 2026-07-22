@@ -12,7 +12,8 @@ const STORAGE_KEYS = {
   history: 'wordbook_history_v1',
   audit: 'wordbook_audit_v1',
   attempts: 'wordbook_attempts_v1',
-  missed: 'wordbook_missed_words_v1'
+  missed: 'wordbook_missed_words_v1',
+  cleared: 'wordbook_cleared_v1'
 };
 
 const DEFAULT_SETTINGS = {
@@ -467,6 +468,8 @@ class GameEngine {
         return w && w.tags && w.tags.includes(gradeFilter);
       });
     }
+    this._pendingGrade = gradeFilter || null;
+    this._pendingSet = setFilter || null;
     const count = Math.min(wordCount || this.settings.wordCount, enabled.length);
     const seed = Math.floor(Math.random() * 0x7fffffff);
     const order = seededShuffle(enabled, seed).slice(0, count);
@@ -488,6 +491,8 @@ class GameEngine {
     this.session = {
       id: uuid(),
       level,
+      grade: this._pendingGrade || null,
+      set: this._pendingSet || null,
       startedAt: new Date().toISOString(),
       state: 'presentingQuestion',
       seed,
@@ -508,6 +513,8 @@ class GameEngine {
       reviewIndex: 0,
       isMissedPractice: !!isMissedPractice
     };
+    this._pendingGrade = null;
+    this._pendingSet = null;
     this.saveSession();
     this.presentQuestion();
   }
@@ -756,6 +763,21 @@ class GameEngine {
     const history = loadJSON(STORAGE_KEYS.history) || [];
     history.push(entry);
     saveJSON(STORAGE_KEYS.history, history);
+
+    // クリア状態を記録（正答率80%以上でクリア扱い）
+    if (this.session.grade && this.session.set && this.session.level) {
+      const accuracy = this.session.netCorrectCount / this.session.targetCorrectCount;
+      if (accuracy >= 0.8) {
+        const cleared = loadJSON(STORAGE_KEYS.cleared) || {};
+        const key = `${this.session.grade}:${this.session.set}:Lv${this.session.level}`;
+        cleared[key] = {
+          completedAt: this.session.completedAt,
+          accuracy: Math.round(accuracy * 100),
+          durationSeconds: Math.round(duration)
+        };
+        saveJSON(STORAGE_KEYS.cleared, cleared);
+      }
+    }
 
     const missedWords = missedIds
       .map(id => {
@@ -1037,6 +1059,7 @@ class UIController {
     grid.innerHTML = '';
     const circled = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮','⑯','⑰','⑱','⑲','⑳'];
     const grade = this.selectedGrade || 'eiken-grade3';
+    const cleared = loadJSON(STORAGE_KEYS.cleared) || {};
     // 選択中の級の単語だけからブロック番号を計算
     const gradeWords = this.engine.wordsArray.filter(w => w.tags && w.tags.includes(grade));
     const maxSet = Math.max(...gradeWords.map(w => {
@@ -1048,15 +1071,35 @@ class UIController {
       const setTag = `set${i}`;
       const count = gradeWords.filter(w => w.tags && w.tags.includes(setTag)).length;
       if (count === 0) continue;
+      // クリア済みのLv数をカウント
+      let clearedLvs = [];
+      for (let lv = 1; lv <= 3; lv++) {
+        if (cleared[`${grade}:${setTag}:Lv${lv}`]) clearedLvs.push(lv);
+      }
+      const clearBadge = clearedLvs.length > 0
+        ? `<span class="set-clear">✓Lv${clearedLvs.join('')}</span>`
+        : '';
       const btn = document.createElement('button');
       btn.className = 'set-card-btn';
-      btn.innerHTML = `<span class="set-num">${circled[i-1] || i}</span><span class="set-count">${count}語</span>`;
+      if (clearedLvs.length === 3) btn.classList.add('all-cleared');
+      btn.innerHTML = `<span class="set-num">${circled[i-1] || i}</span><span class="set-count">${count}語</span>${clearBadge}`;
       btn.addEventListener('click', () => {
         this.selectedSet = setTag;
         const title = $('#level-select-title');
-        if (title) {
-          const gradeLabel = grade === 'eiken-pre2' ? '準2級' : '3級';
-          title.textContent = `${gradeLabel} ${circled[i-1] || i}（${count}語）`;
+        const gradeLabel = grade === 'eiken-pre2' ? '準2級' : '3級';
+        if (title) title.textContent = `${gradeLabel} ${circled[i-1] || i}（${count}語）`;
+        // Lvボタンのクリア状態を更新
+        for (let lv = 1; lv <= 3; lv++) {
+          const lvBtn = $(`#btn-start-l${lv}`);
+          if (!lvBtn) continue;
+          const isCleared = cleared[`${grade}:${setTag}:Lv${lv}`];
+          if (isCleared) {
+            lvBtn.classList.add('lv-cleared');
+            lvBtn.textContent = `Lv${lv} ✓（正答率${isCleared.accuracy}%）`;
+          } else {
+            lvBtn.classList.remove('lv-cleared');
+            lvBtn.textContent = lv === 1 ? 'Lv1 書き写し' : (lv === 2 ? 'Lv2 部分隠し' : 'Lv3 完全記憶');
+          }
         }
         const overlay = $('#level-select-overlay');
         if (overlay) overlay.classList.remove('hidden');
@@ -1148,6 +1191,7 @@ class UIController {
     $('#btn-download-session').addEventListener('click', () => downloadAllData());
     $('#btn-back-menu').addEventListener('click', () => {
       this.updateMainScreen();
+      this.renderSetGrid();
       this.showScreen('screen-main');
     });
 
