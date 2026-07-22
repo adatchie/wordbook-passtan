@@ -387,6 +387,31 @@ function normalizeOCRText(text) {
   return String(text).toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
 }
 
+// レーベンシュタイン距離（編集距離）で文字列の近さを計算
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+    }
+  }
+  return dp[m][n];
+}
+
+// 類似度（0〜1）。1.0は完全一致
+function similarity(a, b) {
+  if (!a || !b) return 0;
+  const maxLen = Math.max(a.length, b.length);
+  if (maxLen === 0) return 1;
+  return 1 - levenshtein(a, b) / maxLen;
+}
+
 class OCRController {
   constructor() {
     this.captionerPromise = null;
@@ -434,7 +459,7 @@ class OCRController {
 
     // Transformers.js v2 は Canvas 要素ではなく、画像URL文字列を受け取る。
     // Canvas から作った data URL をそのまま渡すと、ライブラリ側で画像として読み込める。
-    const [output] = await captioner(imageDataUrl, { max_new_tokens: 32 });
+    const [output] = await captioner(imageDataUrl, { max_new_tokens: 64 });
     const text = ((output && output.generated_text) || '').trim();
     const confidence = text ? 100 : 0;
     return { text, confidence, metrics: {} };
@@ -701,7 +726,10 @@ class GameEngine {
     // 期待値も正規化して記号を無視 — アルファベットのみで比較
     const expected = normalizeOCRText(info.word.word);
     const normalized = normalizeOCRText(text);
-    return { matched: normalized === expected && expected !== '', expected, normalized, raw: text || '' };
+    // 完全一致、またはファジーマッチ（長い熟語の2行書き等で一部欠損しても正解扱い）
+    const sim = similarity(normalized, expected);
+    const matched = expected !== '' && (normalized === expected || (expected.length >= 5 && sim >= 0.85));
+    return { matched, expected, normalized, raw: text || '', similarity: Math.round(sim * 100) };
   }
 
   markCorrect(isManual = false) {
@@ -1363,17 +1391,19 @@ class UIController {
       const metrics = result.metrics || {};
       const rawText = (result.text || '(読み取れず)').trim();
       const normText = check.normalized || '(なし)';
-      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText} / 信頼度: ${Math.round(confidence)}%`;
+      const simText = check.similarity !== undefined ? ` / 類似度: ${check.similarity}%` : '';
+      const debugText = `期待: ${check.expected || '(なし)'} / 正規化: ${normText} / raw: ${rawText}${simText}`;
       if (this.els.ocrDebug) {
         this.els.ocrDebug.textContent = debugText;
         this.els.ocrDebug.style.display = 'block';
       }
 
       if (check.matched && confidence >= 60) {
-        this.setFeedback(`OCR一致「${check.normalized}」（信頼度 ${Math.round(confidence)}%）`, 'correct');
+        const matchLabel = check.normalized === check.expected ? '完全一致' : `類似度${check.similarity}%`;
+        this.setFeedback(`OCR正解「${check.normalized}」（${matchLabel}）`, 'correct');
         this.engine.markCorrect(false);
       } else {
-        this.setFeedback(`OCR結果「${check.normalized || result.text || '（読み取れませんでした）'}」（信頼度 ${Math.round(confidence)}%）`, 'incorrect');
+        this.setFeedback(`OCR結果「${check.normalized || result.text || '（読み取れませんでした）'}」（信頼度 ${Math.round(confidence)}%${simText}）`, 'incorrect');
         this.engine.markIncorrect();
       }
     } catch (e) {
