@@ -342,7 +342,7 @@ h2 {
 #draw-canvas {
   width: 100%;
   height: auto;
-  aspect-ratio: 600 / 350;
+  aspect-ratio: 800 / 500;
   background: #ffffff;
   border: 3px solid #c7c7cc;
   border-radius: 16px;

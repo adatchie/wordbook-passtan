@@ -150,7 +150,14 @@ function seededShuffle(array, seed) {
   return a;
 }
 
+function normalizeForDisplay(word) {
+  // 表示から余計な記号（～、（）[]等）を取り除く。スペースは保持。
+  return word.replace(/[～~()[\]【】「」{}]/g, '').trim();
+}
+
 function getMaskedPrompt(word, level, seed) {
+  // 記号を除去してからマスク処理
+  word = normalizeForDisplay(word);
   const chars = [...word];
   const alphaIndices = chars.map((c, i) => (/[a-zA-Z]/.test(c) ? i : -1)).filter(i => i >= 0);
 
@@ -569,9 +576,10 @@ class GameEngine {
     const word = this.wordsMap.get(id) || null;
     if (!word) return { word: null, prompt: '', hint: '', charCount: 0 };
     const seed = this.session.seed + this.session.currentIndex * 1009 + 12345;
+    const cleanWord = normalizeForDisplay(word.word);
     const prompt = getMaskedPrompt(word.word, this.session.level, seed);
-    const alphaCount = [...word.word].filter(c => /[a-zA-Z]/.test(c)).length;
-    const totalCount = [...word.word].length;
+    const alphaCount = [...cleanWord].filter(c => /[a-zA-Z]/.test(c)).length;
+    const totalCount = [...cleanWord].length;
     const hint = this.session.level === 1 ? '' : `${totalCount}文字（英字${alphaCount}）`;
     return { word, prompt, hint, charCount: alphaCount };
   }
@@ -683,7 +691,8 @@ class GameEngine {
   checkOCR(text) {
     const info = this.getCurrentInfo();
     if (!info.word) return { matched: false, expected: '', normalized: normalizeOCRText(text), raw: text || '' };
-    const expected = info.word.word.toLowerCase();
+    // 期待値も正規化して記号を無視 — アルファベットのみで比較
+    const expected = normalizeOCRText(info.word.word);
     const normalized = normalizeOCRText(text);
     return { matched: normalized === expected && expected !== '', expected, normalized, raw: text || '' };
   }
@@ -846,7 +855,6 @@ class GameEngine {
       if (called) return;
       called = true;
       clearTimeout(fallbackTimer);
-      try { window.speechSynthesis.cancel(); } catch(e) {}
       if (onEnd) onEnd();
     };
     // iOS Chrome/Safari では onend が発火しないバグがあるため、
@@ -854,8 +862,8 @@ class GameEngine {
     const estimatedMs = Math.max(2000, text.length * 120 / (this.settings.ttsRate || 0.9));
     const fallbackTimer = setTimeout(safeCall, estimatedMs + 500);
     try {
-      window.speechSynthesis.cancel();
-      // iOS では pause 状態から復帰が必要
+      // iOS では cancel() 直後の speak() が無視されるバグがある。
+      // resume() のみ呼び、キューに入れて発話させる。
       if (window.speechSynthesis.resume) window.speechSynthesis.resume();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
@@ -1602,21 +1610,22 @@ async function boot() {
   }
 
   // iOS Safari/Chrome は speechSynthesis を初回タップ時にアンロックする必要がある
-  // ユーザージェスチャー内で空の発話を1回実行してエンジンを有効化
+  // 実際の短い単語を発話させてエンジンを有効化（cancelしないことが重要）
+  let ttsUnlocked = false;
   function unlockTTS() {
-    if (!window.speechSynthesis) return;
+    if (ttsUnlocked || !window.speechSynthesis) return;
+    ttsUnlocked = true;
     try {
-      const u = new SpeechSynthesisUtterance('');
+      const u = new SpeechSynthesisUtterance('hi');
       u.volume = 0;
-      u.rate = 1;
+      u.rate = 10;
       window.speechSynthesis.speak(u);
-      window.speechSynthesis.cancel();
     } catch(e) {}
     document.removeEventListener('click', unlockTTS);
-    document.removeEventListener('touchstart', unlockTTS);
+    document.removeEventListener('touchend', unlockTTS);
   }
-  document.addEventListener('click', unlockTTS, { once: false });
-  document.addEventListener('touchstart', unlockTTS, { once: false });
+  document.addEventListener('click', unlockTTS);
+  document.addEventListener('touchend', unlockTTS);
 }
 
 if (document.readyState === 'loading') {
