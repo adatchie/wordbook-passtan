@@ -855,6 +855,8 @@ class GameEngine {
     const fallbackTimer = setTimeout(safeCall, estimatedMs + 500);
     try {
       window.speechSynthesis.cancel();
+      // iOS では pause 状態から復帰が必要
+      if (window.speechSynthesis.resume) window.speechSynthesis.resume();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
       u.rate = this.settings.ttsRate;
@@ -1598,6 +1600,23 @@ async function boot() {
   if (typeof window !== 'undefined') {
     window.__wordbook = { engine, ui, canvasCtrl, settings };
   }
+
+  // iOS Safari/Chrome は speechSynthesis を初回タップ時にアンロックする必要がある
+  // ユーザージェスチャー内で空の発話を1回実行してエンジンを有効化
+  function unlockTTS() {
+    if (!window.speechSynthesis) return;
+    try {
+      const u = new SpeechSynthesisUtterance('');
+      u.volume = 0;
+      u.rate = 1;
+      window.speechSynthesis.speak(u);
+      window.speechSynthesis.cancel();
+    } catch(e) {}
+    document.removeEventListener('click', unlockTTS);
+    document.removeEventListener('touchstart', unlockTTS);
+  }
+  document.addEventListener('click', unlockTTS, { once: false });
+  document.addEventListener('touchstart', unlockTTS, { once: false });
 }
 
 if (document.readyState === 'loading') {
