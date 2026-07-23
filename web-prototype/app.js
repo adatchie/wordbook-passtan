@@ -912,15 +912,24 @@ class GameEngine {
     const estimatedMs = Math.max(2000, text.length * 120 / (this.settings.ttsRate || 0.9));
     const fallbackTimer = setTimeout(safeCall, estimatedMs + 500);
     try {
-      // iOS では cancel() 直後の speak() が無視されるバグがある。
-      // resume() のみ呼び、キューに入れて発話させる。
-      if (window.speechSynthesis.resume) window.speechSynthesis.resume();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'en-US';
-      u.rate = this.settings.ttsRate;
-      u.onend = safeCall;
-      u.onerror = safeCall;
-      window.speechSynthesis.speak(u);
+      // iOSの音声エンジンを確実に起動するためのハック:
+      // pause→resumeのサイクルを回してエンジンを活性化させる
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.pause();
+      // 微小なsetTimeoutを挟むことでiOSのイベントループに処理を明け渡す
+      setTimeout(() => {
+        try {
+          window.speechSynthesis.resume();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = 'en-US';
+          u.rate = this.settings.ttsRate;
+          u.onend = safeCall;
+          u.onerror = safeCall;
+          window.speechSynthesis.speak(u);
+        } catch(e2) {
+          safeCall();
+        }
+      }, 50);
     } catch (e) {
       safeCall();
     }
@@ -1685,21 +1694,32 @@ async function boot() {
 
   // iOS Safari/Chrome は speechSynthesis を初回タップ時にアンロックする必要がある
   // 実際の短い単語を発話させてエンジンを有効化（cancelしないことが重要）
+  // さらに、ページがアクティブになるたびにエンジンを再活性化する
   let ttsUnlocked = false;
   function unlockTTS() {
-    if (ttsUnlocked || !window.speechSynthesis) return;
-    ttsUnlocked = true;
+    if (!window.speechSynthesis) return;
     try {
-      const u = new SpeechSynthesisUtterance('hi');
-      u.volume = 0;
-      u.rate = 10;
-      window.speechSynthesis.speak(u);
+      // pause→resumeサイクルでエンジンを強制起動
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.resume();
+      if (!ttsUnlocked) {
+        ttsUnlocked = true;
+        const u = new SpeechSynthesisUtterance('hi');
+        u.volume = 0;
+        u.rate = 10;
+        window.speechSynthesis.speak(u);
+      }
     } catch(e) {}
-    document.removeEventListener('click', unlockTTS);
-    document.removeEventListener('touchend', unlockTTS);
   }
   document.addEventListener('click', unlockTTS);
   document.addEventListener('touchend', unlockTTS);
+
+  // ページが再びアクティブになった時もエンジンを再起動
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && window.speechSynthesis) {
+      try { window.speechSynthesis.resume(); } catch(e) {}
+    }
+  });
 }
 
 if (document.readyState === 'loading') {
