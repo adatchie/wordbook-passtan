@@ -393,6 +393,9 @@ function normalizeOCRText(text) {
   if (!text) return '';
   return String(text)
     .toLowerCase()
+    // 手書きの l を 1 と誤認識することが多いので一律で l に変換
+    // (1は他の文字に化けることがほぼないため安全)
+    .replace(/1/g, 'l')
     // 記号類は削除（l/fの両方に誤認しうるため一律変換は危険）
     // 欠損はレーベンシュタイン距離のファジーマッチで吸収
     .replace(/\s+/g, '')
