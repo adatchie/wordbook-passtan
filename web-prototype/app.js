@@ -152,8 +152,15 @@ function seededShuffle(array, seed) {
 }
 
 function normalizeForDisplay(word) {
-  // 表示から余計な記号（～、（）[]等）を取り除く。スペースは保持。
-  return word.replace(/[～~()[\]【】「」{}]/g, '').trim();
+  // () [] で囲まれた部分（中身ごと）を削除
+  let s = word.replace(/\([^)]*\)/g, '').replace(/\[[^\]]*\]/g, '');
+  // 先頭の (~) や末尾の ~ を削除
+  s = s.replace(/^~\s*/, '').replace(/\s*~$/, '');
+  // 残った記号を削除
+  s = s.replace(/[～~()[\]【】「」{}]/g, '');
+  // 連続スペースを整理
+  s = s.replace(/\s+/g, ' ').trim();
+  return s;
 }
 
 function getMaskedPrompt(word, level, seed) {
@@ -384,7 +391,12 @@ class CanvasController {
 
 function normalizeOCRText(text) {
   if (!text) return '';
-  return String(text).toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
+  return String(text)
+    .toLowerCase()
+    // OCRが l を ():/\ 等の記号と誤認識することが多いので一律で l に変換
+    .replace(/[():/\\|!]/g, 'l')
+    .replace(/\s+/g, '')
+    .replace(/[^a-z]/g, '');
 }
 
 // レーベンシュタイン距離（編集距離）で文字列の近さを計算
