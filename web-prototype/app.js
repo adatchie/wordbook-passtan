@@ -393,9 +393,10 @@ function normalizeOCRText(text) {
   if (!text) return '';
   return String(text)
     .toLowerCase()
-    // OCRが l を ():/\ 等の記号と誤認識することが多いので一律で l に変換
-    .replace(/[():/\\|!]/g, 'l')
+    // 記号類は削除（l/fの両方に誤認しうるため一律変換は危険）
+    // 欠損はレーベンシュタイン距離のファジーマッチで吸収
     .replace(/\s+/g, '')
+    .replace(/[():/\\|!]/g, '')
     .replace(/[^a-z]/g, '');
 }
 
@@ -738,9 +739,16 @@ class GameEngine {
     // 期待値も正規化して記号を無視 — アルファベットのみで比較
     const expected = normalizeOCRText(info.word.word);
     const normalized = normalizeOCRText(text);
-    // 完全一致、またはファジーマッチ（長い熟語の2行書き等で一部欠損しても正解扱い）
     const sim = similarity(normalized, expected);
-    const matched = expected !== '' && (normalized === expected || (expected.length >= 5 && sim >= 0.85));
+    // 完全一致、または許容誤差以内の近さ：
+    // - 短い単語（3-6文字）は1文字違いまで許可
+    // - 長い熟語（7文字以上）は類似度85%以上で許可
+    const editDist = levenshtein(normalized, expected);
+    const matched = expected !== '' && (
+      normalized === expected ||
+      (expected.length >= 3 && expected.length <= 6 && editDist <= 1 && normalized.length >= expected.length - 1) ||
+      (expected.length >= 7 && sim >= 0.85)
+    );
     return { matched, expected, normalized, raw: text || '', similarity: Math.round(sim * 100) };
   }
 
