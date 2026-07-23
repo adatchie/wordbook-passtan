@@ -766,20 +766,21 @@ class GameEngine {
     const info = this.getCurrentInfo();
     this.onChange('correctSpeakingAndTransitioning', { session: this.session, word: info.word, isManual });
 
-    this.speak(info.word.word, () => {
-      if (!this.session) return;
-      this.session.currentIndex += 1;
-      this.saveSession();
-      if (this.session.netCorrectCount >= this.session.targetCorrectCount) {
-        if (this.session.missedWordIds && this.session.missedWordIds.length > 0) {
-          this.startReview();
-        } else {
-          this.completeSession();
-        }
+    // 音声は非ブロッキングで再生（失敗しても次へ進む）
+    this.speak(info.word.word);
+
+    // 次の問題へ即座に遷移（音声の終了を待たない）
+    this.session.currentIndex += 1;
+    this.saveSession();
+    if (this.session.netCorrectCount >= this.session.targetCorrectCount) {
+      if (this.session.missedWordIds && this.session.missedWordIds.length > 0) {
+        this.startReview();
       } else {
-        this.presentQuestion();
+        this.completeSession();
       }
-    });
+    } else {
+      this.presentQuestion();
+    }
   }
 
   isManualPassAllowed() {
@@ -918,43 +919,16 @@ class GameEngine {
     this.markTimeout({ silent: true });
   }
 
-  speak(text, onEnd) {
-    if (!window.speechSynthesis) {
-      if (onEnd) onEnd();
-      return;
-    }
-    let called = false;
-    const safeCall = () => {
-      if (called) return;
-      called = true;
-      clearTimeout(fallbackTimer);
-      if (onEnd) onEnd();
-    };
-    // iOS Chrome/Safari では onend が発火しないバグがあるため、
-    // 文字数から推定した時間後にフォールバックで次へ進む
-    const estimatedMs = Math.max(2000, text.length * 120 / (this.settings.ttsRate || 0.9));
-    const fallbackTimer = setTimeout(safeCall, estimatedMs + 500);
+  speak(text) {
+    if (!window.speechSynthesis) return;
     try {
-      // iOSの音声エンジンを確実に起動するためのハック:
-      // pause→resumeのサイクルを回してエンジンを活性化させる
       window.speechSynthesis.cancel();
-      window.speechSynthesis.pause();
-      // 微小なsetTimeoutを挟むことでiOSのイベントループに処理を明け渡す
-      setTimeout(() => {
-        try {
-          window.speechSynthesis.resume();
-          const u = new SpeechSynthesisUtterance(text);
-          u.lang = 'en-US';
-          u.rate = this.settings.ttsRate;
-          u.onend = safeCall;
-          u.onerror = safeCall;
-          window.speechSynthesis.speak(u);
-        } catch(e2) {
-          safeCall();
-        }
-      }, 50);
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = this.settings.ttsRate;
+      window.speechSynthesis.speak(u);
     } catch (e) {
-      safeCall();
+      // 失敗は無視（音声なしくてもゲームは続行）
     }
   }
 
