@@ -1262,7 +1262,7 @@ class UIController {
         this.els.correctBtn.textContent = 'できた！';
         this.els.retryBtn.innerHTML = '× 間違いとして次へ';
         if (this.els.rewriteBtn) {
-          this.els.rewriteBtn.style.display = 'inline-block';
+          this.els.rewriteBtn.style.display = 'block';
           this.els.rewriteBtn.textContent = 'もう一度書く';
         }
         if (this.els.ocrDebug) this.els.ocrDebug.style.display = 'none';
@@ -1292,7 +1292,7 @@ class UIController {
         this.els.retryBtn.innerHTML = '間違いのまま次へ';
         this.els.retryBtn.disabled = false;
         if (this.els.rewriteBtn) {
-          this.els.rewriteBtn.style.display = 'inline-block';
+          this.els.rewriteBtn.style.display = 'block';
           this.els.rewriteBtn.textContent = 'もう一度書く';
           this.els.rewriteBtn.disabled = false;
         }

@@ -361,6 +361,7 @@ h2 {
 
 /* Rewrite button (above canvas) */
 .rewrite-top-btn {
+  display: block;
   width: 100%;
   padding: 14px;
   margin-bottom: 8px;
@@ -371,6 +372,10 @@ h2 {
   color: #856404;
   border-radius: 12px;
   cursor: pointer;
+}
+.rewrite-top-btn[style*="display:none"],
+.rewrite-top-btn[style*="display: none"] {
+  display: none !important;
 }
 
 /* Canvas */
