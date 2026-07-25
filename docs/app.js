@@ -932,6 +932,18 @@ class GameEngine {
     }
   }
 
+  // iOS用: ユーザージェスチャー内で呼ぶことでTTSエンジンを活性化
+  primeTTS() {
+    if (!window.speechSynthesis) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      u.rate = 10;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
   recordAttempt(resultType) {
     if (!this.session) return;
     const info = this.getCurrentInfo();
@@ -1361,6 +1373,9 @@ class UIController {
       alert('まだ何も書かれていません');
       return;
     }
+    // iOS: ユーザージェスチャー内でTTSエンジンを活性化しておく
+    // これがないと await を跨いだ後の speak() が無視される
+    this.engine.primeTTS();
     await this.runOCR();
   }
 
