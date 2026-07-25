@@ -359,6 +359,20 @@ h2 {
   margin-top: 6px;
 }
 
+/* Rewrite button (above canvas) */
+.rewrite-top-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  color: #856404;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
 /* Canvas */
 #draw-canvas {
   width: 100%;

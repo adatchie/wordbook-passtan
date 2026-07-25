@@ -1037,7 +1037,7 @@ class UIController {
     this.els.feedback = $('#feedback');
     this.els.manualPassBtn = $('#btn-manual-pass');
     this.els.retryBtn = $('#btn-retry');
-    this.els.rewriteBtn = $('#btn-rewrite');
+    this.els.rewriteBtn = $('#btn-rewrite-top');
     this.els.ocrDebug = $('#ocr-debug');
     this.els.savePngBtn = $('#btn-save-png');
     this.els.manualPassStatus = $('#manual-pass-status');
