@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>セーブデータ復元ツール</title>
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background:#0f172a; color:#e2e8f0; }
+  h1 { font-size: 1.3rem; } textarea { width: 100%; height: 9rem; font-family: monospace; font-size: .75rem; }
+  button { font-size: 1.1rem; padding: .8rem 1.5rem; margin: .4rem .4rem .4rem 0; border-radius: .6rem; border: none; }
+  .primary { background: #2563eb; color: white; } .ok { color: #34d399; font-weight: bold; } .err { color: #f87171; }
+  .card { background:#1e293b; border-radius:.8rem; padding:1rem; margin-bottom:1.2rem; }
+  pre { white-space: pre-wrap; word-break: break-all; font-size: .7rem; color:#94a3b8; }
+</style>
+</head>
+<body>
+<h1>🛠️ セーブデータ復元ツール</h1>
+
+<div class="card">
+<h2>ボタンを押すとデータを書き込みます</h2>
+<p>このページは wordbook-passtan 用の復元ツールです。</p>
+<button class="primary" onclick="restore()">復元する</button>
+<span id="result"></span>
+<pre id="detail"></pre>
+</div>
+
+<div class="card">
+<h2>確認</h2>
+<button onclick="dumpAll()">今保存されている内容を見る</button>
+<pre id="dump"></pre>
+</div>
+
+<script>
+const PAYLOAD = {"wordbook_cleared_v1": {"eiken-pre2:set1:Lv1": {"completedAt": "2026-08-11T18:11:00", "accuracy": 100, "durationSeconds": 354}, "eiken-pre2:set1:Lv2": {"completedAt": "2026-08-12T19:12:00", "accuracy": 80, "durationSeconds": 521}, "eiken-pre2:set2:Lv1": {"completedAt": "2026-08-13T20:13:00", "accuracy": 87, "durationSeconds": 468}, "eiken-pre2:set2:Lv2": {"completedAt": "2026-08-14T21:14:00", "accuracy": 84, "durationSeconds": 344}, "eiken-pre2:set3:Lv1": {"completedAt": "2026-08-15T17:15:00", "accuracy": 97, "durationSeconds": 329}, "eiken-pre2:set3:Lv2": {"completedAt": "2026-08-16T18:16:00", "accuracy": 98, "durationSeconds": 672}, "eiken-pre2:set4:Lv1": {"completedAt": "2026-08-17T19:17:00", "accuracy": 81, "durationSeconds": 270}, "eiken-pre2:set4:Lv2": {"completedAt": "2026-08-18T20:18:00", "accuracy": 82, "durationSeconds": 463}, "eiken-pre2:set5:Lv1": {"completedAt": "2026-08-19T21:19:00", "accuracy": 87, "durationSeconds": 757}, "eiken-pre2:set5:Lv2": {"completedAt": "2026-08-20T17:20:00", "accuracy": 99, "durationSeconds": 267}, "eiken-pre2:set6:Lv1": {"completedAt": "2026-08-21T18:21:00", "accuracy": 97, "durationSeconds": 443}, "eiken-pre2:set7:Lv1": {"completedAt": "2026-08-22T19:22:00", "accuracy": 100, "durationSeconds": 798}, "eiken-pre2:set8:Lv1": {"completedAt": "2026-08-23T20:23:00", "accuracy": 93, "durationSeconds": 465}, "eiken-pre2:set9:Lv1": {"completedAt": "2026-08-24T21:24:00", "accuracy": 94, "durationSeconds": 843}, "eiken-pre2:set10:Lv1": {"completedAt": "2026-08-25T17:25:00", "accuracy": 88, "durationSeconds": 246}, "eiken-pre2:set11:Lv1": {"completedAt": "2026-08-26T18:26:00", "accuracy": 85, "durationSeconds": 672}, "eiken-pre2:set12:Lv1": {"completedAt": "2026-08-27T19:27:00", "accuracy": 90, "durationSeconds": 524}, "eiken-pre2:set13:Lv1": {"completedAt": "2026-08-28T20:28:00", "accuracy": 84, "durationSeconds": 460}, "eiken-pre2:set14:Lv1": {"completedAt": "2026-08-29T21:29:00", "accuracy": 90, "durationSeconds": 344}, "eiken-pre2:set15:Lv1": {"completedAt": "2026-08-30T17:30:00", "accuracy": 82, "durationSeconds": 629}}};
+
+function restore() {
+  try {
+    for (const [k, v] of Object.entries(PAYLOAD)) {
+      localStorage.setItem(k, JSON.stringify(v));
+    }
+    const r = document.getElementById('result');
+    r.textContent = '✅ 復元完了（' + Object.keys(PAYLOAD).length + '件）';
+    r.className = 'ok';
+    document.getElementById('detail').textContent =
+      Object.keys(PAYLOAD).map(k => k + ' 書き込み済み').join('\n');
+  } catch (e) {
+    const r = document.getElementById('result');
+    r.textContent = '❌ ' + e.message;
+    r.className = 'err';
+  }
+}
+function dumpAll() {
+  const lines = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    lines.push(k + ' = ' + localStorage.getItem(k).slice(0, 100) + '…');
+  }
+  document.getElementById('dump').textContent = lines.join('\n') || '(空)';
+}
+</script>
+</body>
+</html>
