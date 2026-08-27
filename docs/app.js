@@ -1638,6 +1638,8 @@ class UIController {
         div.innerHTML = img
           ? `<img src="${img}" alt=""><div class="ship-name">${title}</div>`
           : `<div class="ship-silhouette">❓</div><div class="ship-name">${has ? title : '???（未配属）'}</div>`;
+        if (has) div.addEventListener('click', () => this.openShipDetail(s.id, m));
+        else div.style.cursor = 'default';
         grid.appendChild(div);
       });
       $('#ships-progress').textContent = `配属 ${owned} / ${Ships.FLEET.length} 隻 — 毎日のセッション完走で1隻配属！イージス艦はブロッククリア25回から解放`;
@@ -1656,6 +1658,45 @@ class UIController {
         .catch(() => { this._shipManifest = {}; render(); });
     }
     this.showScreen('screen-ships');
+  }
+
+  /* ---- 艦艇詳細モーダル ---- */
+  openShipDetail(id, manifest) {
+    const s = Ships.FLEET.find(x => x.id === id);
+    if (!s) return;
+    const parts = id.split('-');
+    const code = parts[0].toUpperCase();
+    const num = parts[1];
+    const title = `[${s.kind}]艦「${s.cls}」型 ${code}-${num}「${s.name || s.cls}」`;
+    const spec = Ships.SPECS[s.cls] || Ships.SPECS[code] || null;
+    const meta = manifest && manifest[id];
+    const img = meta ? meta.img : null;
+    const rows = spec ? [
+      ['型名', spec.en],
+      ['基準排水量', spec.ton],
+      ['主要寸法', spec.dim],
+      ['主機械', spec.engine],
+      ['馬力', spec.hp],
+      ['速力', spec.speed],
+      ['主要兵装', spec.weapons],
+      ['乗員', spec.crew],
+    ] : [];
+    const dlg = document.createElement('div');
+    dlg.className = 'ship-detail-overlay';
+    dlg.innerHTML = `
+      <div class="ship-detail-card">
+        ${img ? `<img src="${img}" alt="">` : ''}
+        <h3>${title}</h3>
+        ${Ships.RARE_IDS.has(id) ? '<div class="ship-rare-tag">🌟 イージス艦</div>' : ''}
+        <table class="ship-spec">
+          ${rows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('')}
+        </table>
+        <p class="note">出典: 海上自衛隊オフィシャルサイト</p>
+        <button class="secondary ship-detail-close">閉じる</button>
+      </div>`;
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.remove(); });
+    dlg.querySelector('.ship-detail-close').addEventListener('click', () => dlg.remove());
+    document.body.appendChild(dlg);
   }
 
   /* ---- Parent / Audit ---- */
