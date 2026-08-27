@@ -25,6 +25,7 @@
         <button id="btn-missed-l3" class="primary missed hidden">Lv3 間違い直し</button>
         <button id="btn-settings" class="secondary">設定</button>
         <button id="btn-history" class="secondary">履歴</button>
+        <button id="btn-ships" class="primary ships-btn">⚓ 艦艇図鑑</button>
         <button id="btn-parent" class="secondary">保護者</button>
       </div>
 
@@ -136,6 +137,13 @@
       <button id="btn-history-back" class="secondary">戻る</button>
     </section>
 
+    <section id="screen-ships" class="screen">
+      <h2>⚓ 艦艇図鑑</h2>
+      <p class="note" id="ships-progress"></p>
+      <div id="ships-grid" class="ships-grid"></div>
+      <button id="btn-ships-back" class="secondary">戻る</button>
+    </section>
+
     <section id="screen-parent-login" class="screen">
       <h2>保護者確認</h2>
       <p>保護者PINを入力してください</p>
@@ -162,6 +170,7 @@
     </dialog>
   </main>
 
+  <script src="ships.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

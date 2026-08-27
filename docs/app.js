@@ -514,6 +514,18 @@ class GameEngine {
     const count = Math.min(wordCount || this.settings.wordCount, enabled.length);
     const seed = Math.floor(Math.random() * 0x7fffffff);
     const order = seededShuffle(enabled, seed).slice(0, count);
+    // 7日ログインボーナス (艦追加配属つき) — 1日1回
+    if (typeof Ships !== 'undefined') {
+      const sp = Ships.load();
+      const today = Ships.todayStr();
+      if (sp.lastLoginClaim !== today) {
+        const ev = Ships.touchLogin(sp, today);
+        if (ev.bonus && ev.ship) {
+          const parts = ev.ship.id.split('-');
+          setTimeout(() => alert(`🎁 7日連続ログインボーナス！\n⚓ 新艦配属: [${ev.ship.kind}]艦「${ev.ship.cls}」型 ${parts[0].toUpperCase()}-${parts[1]}`), 100);
+        }
+      }
+    }
     this._createSession(level, order, false);
   }
 
@@ -1218,6 +1230,9 @@ class UIController {
     $('#btn-history').addEventListener('click', () => this.openHistory());
     $('#btn-history-back').addEventListener('click', () => this.showScreen('screen-main'));
 
+    $('#btn-ships').addEventListener('click', () => this.openShips());
+    $('#btn-ships-back').addEventListener('click', () => this.showScreen('screen-main'));
+
     $('#btn-parent').addEventListener('click', () => this.showScreen('screen-parent-login'));
     $('#btn-parent-login-back').addEventListener('click', () => this.showScreen('screen-main'));
     $('#btn-parent-login').addEventListener('click', () => this.loginParent());
@@ -1323,6 +1338,26 @@ class UIController {
         break;
       case 'completed':
         this.showCompletion(payload.history, payload.missedWords);
+        {
+          // 艦艇配属 (1日1隻) + レア艦解放
+          const sp = Ships.load();
+          const today = Ships.todayStr();
+          const newShip = Ships.onSessionDone(sp, today);
+          const rares = Ships.awardEarnedRares(sp);
+          const spHtml = [];
+          if (newShip) {
+            const parts = newShip.id.split('-');
+            spHtml.push(`⚓ <b>新艦配属！</b> [${newShip.kind}]艦「${newShip.cls}」型 ${parts[0].toUpperCase()}-${parts[1]}`);
+          }
+          rares.forEach(r => {
+            const parts = r.id.split('-');
+            spHtml.push(`🌟 <b>イージス艦 解放！</b> [${r.kind}]艦「${r.cls}」型 ${parts[0].toUpperCase()}-${parts[1]}`);
+          });
+          if (spHtml.length) {
+            const sum = $('#completion-summary');
+            if (sum) sum.innerHTML += `<div class="ship-award">${spHtml.join('<br>')}<br><span style="font-size:.85rem;color:#64748b">（図鑑で確認できます）</span></div>`;
+          }
+        }
         break;
     }
   }
@@ -1579,6 +1614,48 @@ class UIController {
       });
     }
     this.showScreen('screen-history');
+  }
+
+  /* ---- 艦艇図鑑 (JMSDF) ---- */
+  openShips() {
+    const grid = $('#ships-grid');
+    if (!grid) return;
+    const p = Ships.load();
+    let manifest = this._shipManifest;
+    const render = () => {
+      const m = this._shipManifest || {};
+      grid.innerHTML = '';
+      let owned = 0;
+      Ships.FLEET.forEach(s => {
+        const has = p.owned.includes(s.id);
+        if (has) owned++;
+        const meta = m[s.id];
+        const info = this._shipTitles[s.id] || {};
+        const title = info.title || (meta && meta.title) || `${s.kind} ${s.id.toUpperCase()}`;
+        const img = has && meta ? meta.img : null;
+        const div = document.createElement('div');
+        div.className = 'ship-card' + (has ? ' owned' : '') + (Ships.RARE_IDS.has(s.id) ? ' rare' : '');
+        div.innerHTML = img
+          ? `<img src="${img}" alt=""><div class="ship-name">${title}</div>`
+          : `<div class="ship-silhouette">❓</div><div class="ship-name">${has ? title : '???（未配属）'}</div>`;
+        grid.appendChild(div);
+      });
+      $('#ships-progress').textContent = `配属 ${owned} / ${Ships.FLEET.length} 隻 — 毎日のセッション完走で1隻配属！イージス艦はブロッククリア25回から解放`;
+    };
+    this._shipTitles = {};
+    Ships.FLEET.forEach(s => {
+      const parts = s.id.split('-');
+      const code = parts[0].toUpperCase();
+      const num = parts[1];
+      this._shipTitles[s.id] = { title: `[${s.kind}]艦「${s.cls}」型 ${code}-${num}「${s.name || s.cls}」` };
+    });
+    if (manifest) { render(); }
+    else {
+      fetch('img/ships/manifest.json').then(r => r.json())
+        .then(j => { this._shipManifest = j; render(); })
+        .catch(() => { this._shipManifest = {}; render(); });
+    }
+    this.showScreen('screen-ships');
   }
 
   /* ---- Parent / Audit ---- */

@@ -4,6 +4,29 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ---- 艦艇図鑑 (JMSDF) ---- */
+.ships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  padding: 8px 0 16px;
+}
+.ship-card {
+  background: #fff;
+  border: 2px solid #d8dce3;
+  border-radius: 10px;
+  padding: 6px;
+  text-align: center;
+  opacity: 0.55;
+}
+.ship-card.owned { opacity: 1; border-color: #3b82f6; }
+.ship-card.rare.owned { border-color: #f59e0b; background: #fffbeb; }
+.ship-card img { width: 100%; height: 84px; object-fit: cover; border-radius: 6px; }
+.ship-card .ship-silhouette { font-size: 44px; line-height: 84px; }
+.ship-card .ship-name { font-size: 11px; margin-top: 4px; line-height: 1.35; color: #1c1c1e; }
+.ship-award { margin-top: 10px; padding: 10px; background: #eff6ff; border-radius: 8px; font-size: 1rem; }
+.ships-btn { grid-column: 1 / -1; }
+
 html, body {
   margin: 0;
   padding: 0;
