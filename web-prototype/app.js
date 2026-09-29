@@ -26,6 +26,10 @@ const DEFAULT_SETTINGS = {
   pinSalt: null
 };
 
+// 設定画面の保護者ロック (2026-09-30: 子供による設定改ざん対策)
+// 「設定」ボタンを押すと最初にこのPW入力を要求する。正しいときだけ設定画面を開ける。
+const PARENT_LOCK_HASHPromise = hashPin('minna', 'wordbook-parent-lock');
+
 const FALLBACK_WORDS = [
   {id:'w-001', word:'apple', meaningJa:'りんご', enabled:true, tags:['junior-high']},
   {id:'w-002', word:'book', meaningJa:'本', enabled:true, tags:['junior-high']},
@@ -512,8 +516,13 @@ class GameEngine {
     this._pendingGrade = gradeFilter || null;
     this._pendingSet = setFilter || null;
     const count = Math.min(wordCount || this.settings.wordCount, enabled.length);
+    // 2026-09-30: 保護者設定 — 改ざん済みlocalStorage(wordCount<100)でも最低100問を強制
+    // ただしNode.jsテストモードでは解除（小規模セッションで機構検証するため）
+    const safeCount = (typeof globalThis.__WORDBOOK_TEST_MODE__ !== 'undefined' && globalThis.__WORDBOOK_TEST_MODE__)
+      ? count
+      : ((this.settings.below100Approved && count < 100) ? count : Math.max(count, Math.min(100, enabled.length)));
     const seed = Math.floor(Math.random() * 0x7fffffff);
-    const order = seededShuffle(enabled, seed).slice(0, count);
+    const order = seededShuffle(enabled, seed).slice(0, safeCount);
     this._createSession(level, order, false);
   }
 
@@ -1487,7 +1496,16 @@ class UIController {
   }
 
   /* ---- Settings ---- */
-  openSettings() {
+  async openSettings() {
+    // 保護者ロック: 正しいPWを入力しないと設定画面を開けない (2026-09-30)
+    const input = prompt('保護者パスワードを入力してください');
+    if (input === null) return; // キャンセル
+    const lockHash = await PARENT_LOCK_HASHPromise;
+    const inputHash = await hashPin(input, 'wordbook-parent-lock');
+    if (inputHash !== lockHash) {
+      alert('パスワードが違います');
+      return;
+    }
     $('#setting-time-limit').value = (this.settings.timeLimitMs / 1000).toString();
     $('#setting-tts-rate').value = this.settings.ttsRate.toString();
     $('#setting-word-count').value = this.settings.wordCount.toString();
@@ -1513,6 +1531,10 @@ class UIController {
     if (isNaN(timeSec) || timeSec < 3 || timeSec > 60) { alert('制限時間は3〜60秒で入力してください'); return; }
     if (isNaN(ttsRate) || ttsRate < 0.3 || ttsRate > 2.0) { alert('TTS速度は0.3〜2.0で入力してください'); return; }
     if (isNaN(wordCount) || wordCount < 5 || wordCount > 1000) { alert('問題数を5〜1000で入力してください'); return; }
+    // 保護者裁量 (2026-09-30): 設定画面はPWロック済み。保護者のみ100未満への一時変更を許容
+    // (当日の事情で問題数を減らす等)。ただし100問未満のセッションでは軍艦は配属されない
+    if (wordCount < 100 && !confirm(`1セッションを${wordCount}問に変更します。\n※100問未満では軍艦は配属されません。よろしいですか？`)) { return; }
+    this.settings.below100Approved = (wordCount < 100);
     if (isNaN(manualLimit) || manualLimit < 0) { alert('手動正解上限を0以上にしてください'); return; }
     if (isNaN(manualCooldown) || manualCooldown < 0) { alert('クールダウンを0以上にしてください'); return; }
 

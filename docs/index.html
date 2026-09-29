@@ -105,8 +105,8 @@
           <input id="setting-tts-rate" type="number" min="0.3" max="2.0" step="0.1" value="0.9">
         </label>
         <label>
-          1セッションの問題数
-          <input id="setting-word-count" type="number" min="5" max="100" value="100">
+          1セッションの問題数（保護者変更・100未満は軍艦なし）
+          <input id="setting-word-count" type="number" min="5" max="1000" value="100">
         </label>
         <label>
           手動正解上限（1セッション）
@@ -124,7 +124,7 @@
           新しいPIN（4〜6桁の数字）
           <input id="setting-new-pin" type="password" maxlength="6" inputmode="numeric" placeholder="新しいPIN">
         </label>
-        <p class="warning">初期PINは 0000 です。忘れた場合は「全データ消去」でリセットできます。</p>
+        <p class="warning">設定の変更には保護者パスワードが必要です。PINを忘れた場合は保護者が「全データ消去」でリセットできます。</p>
         <button id="btn-save-settings" class="primary">保存</button>
         <button id="btn-reset-data" class="danger">全データ消去</button>
         <button id="btn-settings-back" class="secondary">戻る</button>
@@ -147,7 +147,7 @@
     <section id="screen-parent-login" class="screen">
       <h2>保護者確認</h2>
       <p>保護者PINを入力してください</p>
-      <input id="parent-pin" type="password" maxlength="6" inputmode="numeric" placeholder="0000">
+      <input id="parent-pin" type="password" maxlength="6" inputmode="numeric" placeholder="PIN">
       <button id="btn-parent-login" class="primary">開く</button>
       <button id="btn-parent-login-back" class="secondary">戻る</button>
       <p class="note">PINを忘れた場合は設定から「全データ消去」で初期化できます。</p>

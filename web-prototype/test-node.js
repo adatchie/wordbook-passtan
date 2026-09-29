@@ -3,6 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const { webcrypto } = require('crypto');
 
+// テストモード: 保護者の100問下限強制を解除して小規模セッションで検証できるようにする (2026-09-30)
+global.__WORDBOOK_TEST_MODE__ = true;
+
 // LocalStorage mock
 const store = {};
 global.localStorage = {
