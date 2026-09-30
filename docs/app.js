@@ -234,7 +234,10 @@ function downloadAllData() {
     history: loadJSON(STORAGE_KEYS.history) || [],
     audit: loadJSON(STORAGE_KEYS.audit) || [],
     attempts: loadJSON(STORAGE_KEYS.attempts) || [],
-    missed: loadJSON(STORAGE_KEYS.missed) || []
+    missed: loadJSON(STORAGE_KEYS.missed) || [],
+    cleared: loadJSON(STORAGE_KEYS.cleared) || {},
+    // 艦艇コレクション(ships.jsが読み込まれている環境でのみ取得可能)
+    ships: (typeof Ships !== 'undefined') ? Ships.load() : null
   };
   // PINハッシュは不要ならマスクしてもよいが、テスト用にそのまま
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
