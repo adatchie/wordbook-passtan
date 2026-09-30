@@ -825,10 +825,11 @@ class GameEngine {
     history.push(entry);
     saveJSON(STORAGE_KEYS.history, history);
 
-    // クリア状態を記録（正答率80%以上でクリア扱い）
+    // クリア状態を記録（正答率80%以上 かつ 30問以上でクリア扱い）
+    // 2026-09-30: 5問などの少問セッションで実績が量産される事故の再発防止
     if (this.session.grade && this.session.set && this.session.level) {
       const accuracy = this.session.netCorrectCount / this.session.targetCorrectCount;
-      if (accuracy >= 0.8) {
+      if (accuracy >= 0.8 && this.session.targetCorrectCount >= 30) {
         const cleared = loadJSON(STORAGE_KEYS.cleared) || {};
         const key = `${this.session.grade}:${this.session.set}:Lv${this.session.level}`;
         cleared[key] = {

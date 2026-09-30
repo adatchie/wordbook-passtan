@@ -6,6 +6,31 @@
   <title>Wordbook Web試作</title>
   <link rel="stylesheet" href="styles.css">
   <!-- Transformers.js (TrOCR) は app.js 内で動的 import されます -->
+<script>
+
+(function () {
+  // 2026-09-30: 5問量産による偽クリアの一括除去(本日分のみ削除・restore由来の過去データは保持)
+  const CLEARED_KEY = 'wordbook_cleared_v1';
+  const CLEAN_MARK = 'wordbook_purge_2026-09-30';
+  function loadJSON(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+  function saveJSON(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+  try {
+    if (localStorage.getItem(CLEAN_MARK)) return; // 実行済み
+    const cleared = loadJSON(CLEARED_KEY);
+    if (!cleared || typeof cleared !== 'object') return;
+    const today = new Date();
+    const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    let removed = 0;
+    for (const key of Object.keys(cleared)) {
+      const at = cleared[key] && cleared[key].completedAt;
+      if (typeof at === 'string' && at.slice(0, 10) >= todayStr) { delete cleared[key]; removed++; }
+    }
+    if (removed > 0) saveJSON(CLEARED_KEY, cleared);
+    localStorage.setItem(CLEAN_MARK, JSON.stringify({ at: new Date().toISOString(), removed }));
+  } catch (e) { console.error('purge error', e); }
+})();
+
+</script>
 </head>
 <body>
   <main id="app">
